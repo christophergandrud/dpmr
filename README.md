@@ -1,7 +1,7 @@
 dpmr = Data Package Manager for R
 ====
 
-**Under Development**
+**Under Development. No stable version currently available.**
 
 ## Description
 
@@ -9,6 +9,6 @@ An R package for creating and installing data packages that follow the [Open Kno
 
 The package will eventually have two core functions:
 
-- `dpmr_init`: a function for taking R data frames and associated metadata lists and turning them into datapackages.
+- `dpmr_init`: a function for turning R data frames, associated metadata lists, and source code files used to create the data into data packages.
 
 - `dpmr_install`: a function for downloading and loading datapackages into R.
