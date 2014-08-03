@@ -5,10 +5,15 @@ dpmr = Data Package Manager for R
 
 ## Description
 
-An R package for creating and installing data packages that follow the [Open Knowledge Foundation](https://okfn.org/)'s [Data Package Protocol](http://dataprotocols.org/data-packages/). The package largely mirrors functionality in the Node.js package [Data Package Manager (dpm)](https://github.com/okfn/dpm).
+An R package for creating and installing data packages that follow the
+[Open Knowledge Foundation](https://okfn.org/)'s
+[Data Package Protocol](http://dataprotocols.org/data-packages/).
+The package largely mirrors functionality in the Node.js package
+[Data Package Manager (dpm)](https://github.com/okfn/dpm).
 
 The package will eventually have two core functions:
 
-- `dpmr_init`: a function for turning R data frames, associated metadata lists, and source code files used to create the data into data packages.
+- `dpmr_init`: Initialise a data package from a data frame, metadata list, and
+source code file used to create the data set.
 
-- `dpmr_install`: a function for downloading and loading datapackages into R.
+- `dpmr_install`: Load a data packages into R.
