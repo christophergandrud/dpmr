@@ -8,4 +8,4 @@ Maintainer: Christopher Gandrud <christopher.gandrud@gamil.com>
 Description: An R package for creating and installing data packages that follow
 the Open Knowledge Foundation's Data Package Protocol. The package largely
 mirrors functionality in the Node.js package Data Package Manager (dpm).
-License: GPL-3
+License: MIT

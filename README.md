@@ -13,7 +13,7 @@ The package largely mirrors functionality in the Node.js package
 
 The package will eventually have two core functions:
 
-- `dpmr_init`: Initialise a data package from a data frame, metadata list, and
+- `datapackage_init`: Initialise a data package from a data frame, metadata list, and
 source code file used to create the data set.
 
-- `dpmr_install`: Load a data packages into R.
+- `datapackage_install`: Load a data packages into R.
