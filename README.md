@@ -13,7 +13,7 @@ The package largely mirrors functionality in the Node.js package
 
 The package will eventually have two core functions:
 
-- `datapackage_init`: Initialise a data package from a data frame, metadata list, and
-source code file used to create the data set.
+- `datapackage_init`: Initialise a data package from a data frame, 
+metadata list, and the source code file used to create the data set.
 
 - `datapackage_install`: Load a data package into R.
