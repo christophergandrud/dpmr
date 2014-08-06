@@ -1,6 +1,6 @@
 [<img src="img/logo.png" align="right" height="80"/ alt="dmpr logo">]()
 
-dpmr = Data Package Manager for R
+Data Package Manager for R
 ====
 
 **Under Development. No stable version currently available.**
