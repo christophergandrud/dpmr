@@ -5,7 +5,7 @@
 #' @param load_file character string specifying the path of the data file to
 #' load into R. The correct file paths will be printed when the function runs.
 #' By default the first file in the datapackage.json path list is
-#' loaded.
+#' loaded. Can only be a CSV formatted file currently.
 #' Note: unfortunately R only allows one file to be returned at a time.
 #' @param full_meta logical. Wheter or not to return the full datapackage.json
 #' metadata. Note: when \code{TRUE} only the meta data is returned not the data.
@@ -26,7 +26,21 @@ datapackage_install <- function(path, load_file = NULL, full_meta = FALSE){
     # Parse the datapackage.json file to find the resources
     meta <- paste0(path, '/datapackage.json') %>% fromJSON()
 
-    # Return background information to user
+    #### Return background information to user ------------------------------- #
+    meta_message <- function(field, pre_field){
+        fields <- unlist(meta[field])
+        if (!is.null(fields)){
+            if (length(fields) == 1){
+                message(paste(pre_field, fields))
+            }
+            else if (length(fields) > 1){
+                message(paste(pre_field))
+                for (u in 1:length(fields)) {
+                    fields[[u]] %>% message(paste())
+                }
+            }
+        }
+    }
     pkg_name <- meta$name # Name is a required field in the protocol
     if (!is.null(pkg_name)){
         message(paste('\n--------------------------------',
@@ -37,25 +51,14 @@ datapackage_install <- function(path, load_file = NULL, full_meta = FALSE){
     }
     if (!is.null(meta$title)) message(paste('--', meta$title, '--'))
 
-    meta_message <- function(field, pre_field){
-        fields <- unlist(meta[field])
-        if (!is.null(fields)){
-            if (length(fields) == 1){
-                message(paste(pre_field, fields))
-            }
-            else if (length(fields) > 1){
-                message(pre_field)
-                for (u in 1:length(fields)) {
-                    fields[[u]] %>% message(paste())
-                }
-            }
-        }
-    }
-
     meta_message('version', 'Version:')
+    meta_message('datapackage_version', 'Version:')
     meta_message('last_updated', 'Last updated:')
+    meta_message('description', 'Description:')
+    meta_message('license', 'License:')
+    meta_message('licenses', 'Licenses:')
     meta_message('homepage', 'Homepage:')
-    meta_message('maintainer', 'Maintainer:')
+    meta_message('maintainer', 'Maintainers:')
     meta_message('contributors', 'Contributors:')
     meta_message('sources', 'Sources:')
 

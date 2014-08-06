@@ -12,7 +12,7 @@ local directory, a remote repository's URL, or a GitHub username/repo.}
 \item{load_file}{character string specifying the path of the data file to
 load into R. The correct file paths will be printed when the function runs.
 By default the first file in the datapackage.json path list is
-loaded.
+loaded. Can only be a CSV formatted file currently.
 Note: unfortunately R only allows one file to be returned at a time.}
 
 \item{full_meta}{logical. Wheter or not to return the full datapackage.json
