@@ -24,4 +24,5 @@ metadata list, and the source code file used to create the data set.
 
 [<img src="http://media.tumblr.com/023c285c14ef01953d3b67ffe789004d/tumblr_inline_mor1uu2OOZ1qz4rgp.png" height = "100" align="right" />](http://nadrosia.tumblr.com/post/53520500877/made-in-berlin-badge-update)
 
-Licensed under [GPL-3](https://github.com/christophergandrud/simPH/blob/master/LICENSE.md)
+Licensed under
+[GPL-3](https://github.com/christophergandrud/simPH/blob/master/LICENSE.md)
