@@ -3,7 +3,7 @@
 Data Package Manager for R
 ====
 
-**Under Development. No stable version currently available.**
+**Under Development. Check below for current capabilities.**
 
 ## Description
 
@@ -31,6 +31,12 @@ metadata list, and the source code file used to create the data set.
     - [ ] Load data from a zip file at http.
     
     - [ ] Load data from a GitHub repo.
+    
+## Install development build
+
+```{S}
+devtools::install_github('christophergandrud/dpmr')
+```
 
 ---
 
