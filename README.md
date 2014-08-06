@@ -5,6 +5,8 @@ Data Package Manager for R
 
 **Under Development. Check below for current capabilities.**
 
+[![Build Status](https://travis-ci.org/christophergandrud/dpmr.svg?branch=master)](https://travis-ci.org/christophergandrud/dpmr)
+
 ## Description
 
 An R package for creating and installing data packages that follow the
