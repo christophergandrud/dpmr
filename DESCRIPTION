@@ -2,7 +2,7 @@ Package: dpmr
 Type: Package
 Title: dpmr = Data Package Manager for R
 Version: 0.1
-Date: 2014-08-05
+Date: 2014-08-06
 Author: Christopher Gandrud
 Maintainer: Christopher Gandrud <christopher.gandrud@gamil.com>
 Description: An R package for creating and installing data packages that follow

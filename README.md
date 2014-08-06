@@ -1,4 +1,4 @@
-[<img src="img/logo.png" align="right" height="100"/ alt="dmpr logo">]()
+[<img src="img/logo.png" align="right" height="80"/ alt="dmpr logo">]()
 
 dpmr = Data Package Manager for R
 ====
