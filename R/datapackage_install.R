@@ -24,7 +24,7 @@ datapackage_install <- function(path, load_file = NULL, full_meta = FALSE){
     }
 
     # Parse the datapackage.json file to find the resources
-    meta <- paste0(path, '/datapackage.json') %>% fromJSON()
+    meta <- paste0(path, '/datapackage.json') %>% jsonlite::fromJSON()
 
     #### Return background information to user ------------------------------- #
     meta_message <- function(field, pre_field){

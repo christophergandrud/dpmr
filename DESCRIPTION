@@ -10,3 +10,6 @@ Maintainer: Christopher Gandrud <christopher.gandrud@gamil.com>
 URL: http://christophergandrud.github.io/dpmr/
 BugReports: https://github.com/christophergandrud/dpmr/issues
 License: GPL-3
+Imports:
+    jsonlite,
+    magrittr
