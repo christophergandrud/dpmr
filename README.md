@@ -18,7 +18,19 @@ The package will eventually have two core functions:
 - `datapackage_init`: Initialise a data package from a data frame,
 metadata list, and the source code file used to create the data set.
 
+    + To-do for v0.1
+    
+    - [ ] Everything
+
 - `datapackage_install`: Load a data package into R.
+
+    + To-do for v0.1
+    
+    - [x] Load data from locally stored data package and return metadata
+    
+    - [ ] Load data from a zip file at http.
+    
+    - [ ] Load data from a GitHub repo.
 
 ---
 
