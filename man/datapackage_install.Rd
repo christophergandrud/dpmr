@@ -3,15 +3,20 @@
 \alias{datapackage_install}
 \title{Install a data package}
 \usage{
-datapackage_install(path, load_file = NULL)
+datapackage_install(path, load_file = NULL, full_meta = FALSE)
 }
 \arguments{
 \item{path}{character string path to the data package directory. Can be a
 local directory, a remote repository's URL, or a GitHub username/repo.}
 
-\item{load_file}{character string specifying the name of the data file to
-load into R.
+\item{load_file}{character string specifying the path of the data file to
+load into R. The correct file paths will be printed when the function runs.
+By default the first file in the datapackage.json path list is
+loaded.
 Note: unfortunately R only allows one file to be returned at a time.}
+
+\item{full_meta}{logical. Wheter or not to return the full datapackage.json
+metadata. Note: when \code{TRUE} only the meta data is returned not the data.}
 }
 \description{
 Install a data package
