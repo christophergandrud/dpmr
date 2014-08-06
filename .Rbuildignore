@@ -1,2 +1,15 @@
+# RStudio project related
 ^.*\.Rproj$
 ^\.Rproj\.user$
+.Rhistory
+
+# Git related
+./.git*
+
+# Travis scripts
+.travis.yml
+
+# Images
+^img
+
+LICENSE.md
