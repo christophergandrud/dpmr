@@ -1,4 +1,7 @@
 language: c
+branches:
+  only:
+  - master
 script: ./travis-tool.sh run_tests
 before_script:
   - curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
@@ -6,3 +9,6 @@ before_script:
   - ./travis-tool.sh bootstrap
   - ./travis-tool.sh install_deps
   - ./travis-tool.sh github_package assertthat
+notifications:
+  email:
+    - christopher.gandrud@gmail.com
