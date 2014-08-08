@@ -47,7 +47,7 @@ datapackage_install <- function(path, load_file = NULL, full_meta = FALSE){
                 '\nLoading data package:', meta$name))
     }
     else if (is.null(pkg_name)){
-        stop('Properly documented data package not found.', call. = FALSE)
+        stop('Properly documented data package not found.', call. = F)
     }
     if (!is.null(meta$title)) message(paste('--', meta$title, '--'))
 
@@ -64,6 +64,7 @@ datapackage_install <- function(path, load_file = NULL, full_meta = FALSE){
 
     message('\n----')
 
+    #### Return requested objects to the workspace---------------------------- #
     if (isTRUE(full_meta)) {
         message('Returning the meta data list to you.')
         return(meta)
@@ -73,7 +74,7 @@ datapackage_install <- function(path, load_file = NULL, full_meta = FALSE){
 
         if (is.null(resources)) {
             stop(paste0('\nData package is not properly documented.',
-                '\nNo instruction for finding resources given.\n', call. = FALSE))
+                '\nNo instruction for finding resources given.\n', call. = F))
         }
         else if (!is.null(resources)){
             data_files <- resources[[1]] %>% unlist()
@@ -87,12 +88,12 @@ datapackage_install <- function(path, load_file = NULL, full_meta = FALSE){
         if (is.null(load_file)){
             # Load first file into R
             message(paste('\nLoading into R:', data_files[1]))
-            paste0(path, '/', data_files[1]) %>% read.csv(stringsAsFactors = FALSE)
+            paste0(path, '/', data_files[1]) %>% read.csv(stringsAsFactors = F)
         }
         else if (!is.null(load_file)) {
             if (!(load_file %in% data_files)) stop(paste(load_file,
-                                    "is not in the data package's resource list."),
-                                    call. = FALSE)
+                                "is not in the data package's resource list."),
+                                call. = FALSE)
             message(paste('\nLoading into R:', load_file))
             paste0(path, '/', load_file) %>% read.csv(stringsAsFactors = FALSE)
         }

@@ -21,19 +21,21 @@ The package will eventually have two core functions:
 metadata list, and the source code file used to create the data set.
 
     + To-do for v0.1
-    
+
     - [ ] Everything
 
 - `datapackage_install`: Load a data package into R.
 
     + To-do for v0.1
-    
-    - [x] Load data from locally stored data package and return metadata
-    
+
+    - [x] Load data from locally stored data package CSV and return metadata
+
+    - [ ] Load inline data from the *datapackage.json* file
+
     - [ ] Load data from a zip file at http.
-    
+
     - [ ] Load data from a GitHub repo.
-    
+
 ## Install development build
 
 ```{S}

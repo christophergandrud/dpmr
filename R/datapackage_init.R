@@ -4,23 +4,25 @@
 #' @param df The data frame object name of the data frame you would like to convert
 #' into a data package.
 #' @param package_name character string name for the data package. Unnecessary
-#' if the \code{name} field is specified in \code{meta}.  
+#' if the \code{name} field is specified in \code{meta}.
 #' @param meta The list object name with the data frames meta data. The list
 #' item names must conform to the Open Knowledge Foundation's Data Package
-#' Protocol (see \url{http://dataprotocols.org/data-packages/}). If 
-#' \code{meta = NULL} then a barebones \code{datapackage.json} file will be 
+#' Protocol (see \url{http://dataprotocols.org/data-packages/}). If
+#' \code{meta = NULL} then a barebones \code{datapackage.json} file will be
 #' created.
-#' @param source_clean a character string file path pointing to the source code
-#' file used to gather and clean the \code{df} data frame. Can be in R or any
-#' other language, e.g. Python. \code{source_clean} is not required, but HIGHLY
-#' RECOMMENDED.
-#' 
+#' @param source_cleaner a character string or vector of file paths pointing to
+#' the source code file used to gather and clean the \code{df} data frame. Can
+#' be in R or any other language, e.g. Python. Following Data Package convention
+#' the scripts are renamed \code{process*.*}. You can also  \code{source_cleaner} is not
+#' required, but HIGHLY RECOMMENDED.
+#'
 #' @importFrom magrittr %>%
 #'
 #' @export
 
-datapacakge_init <- function(df, package_name, meta = NULL, source_clean = NULL){
-    # Initialize data package directory
+datapackage_init <- function(df, package_name, meta = NULL,
+                            source_cleaner = NULL){
+    #------------------- Initialize data package directories ----------------- #
     if (!is.null(meta$name)){
         name <- meta$name
     }
@@ -28,8 +30,32 @@ datapacakge_init <- function(df, package_name, meta = NULL, source_clean = NULL)
         if (is.null(package_name)) stop('Must specify package name.', call. = F)
         name <- package_name
     }
-    grepl(name, pattern = ' ', replacement = '')
+    name <- gsub(name, pattern = ' ', replacement = '') # strip name whitespace
+
+    # Stop if data package already exists
+    if (name %in% list.files()) stop(paste('A data package called', name,
+                                    'already exists in this directory.'),
+                                    call. = F)
+
     dir.create(name); dir.create(paste0(name, '/data'))
     dir.create(paste0(name, '/scripts'))
 
+    #---------------------- Copy source files into scripts ------------------- #
+    if (!is.null(source_cleaner)) {
+        message('Moving in the source cleaner files:')
+        for (i in 1:length(source_cleaner)){
+            new_s_name <- source_cleaner[i] %>% gsub(pattern = '(.*\\/)([^.]+)',
+                                            replacement = paste0('process_', i))
+
+            file.copy(from = source_cleaner[i],
+                to = paste0(name, '/scripts/', new_s_name))
+            message(new_s_name)
+        }
+    }
+
+
+    #--- TO-DO Validate Data Frame using testdat ----------------------------- #
+
+    # Write the data file into data/ as a CSV
+    write.csv(df, file = paste0(name, '/data/', 'data1.csv')) # CHANGE NAMING SO THAT IT DRAWS ON META
 }
