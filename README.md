@@ -22,15 +22,23 @@ metadata list, and the source code file used to create the data set.
 
     + To-do for v0.1
 
-    - [ ] Everything
+    - [x] Init basic directory structure.
+
+    - [x] Move cleaner scripts in to *scripts/*.
+
+    - [x] Save data frame as csv in *data/*.
+
+    - [ ] Create bare *database.json*, including deriving attributes from the data.
+
+    - [ ] Initialise using info (almost) exclusively from the `meta` *database_list*.
 
 - `datapackage_install`: Load a data package into R.
 
     + To-do for v0.1
 
-    - [x] Load data from locally stored data package CSV and return metadata
+    - [x] Load data from locally stored data package CSV and return metadata.
 
-    - [ ] Load inline data from the *datapackage.json* file
+    - [ ] Load inline data from the *datapackage.json* file.
 
     - [ ] Load data from a zip file at http.
 
