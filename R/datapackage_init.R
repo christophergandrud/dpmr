@@ -47,8 +47,9 @@ datapackage_init <- function(df, package_name, meta = NULL,
     #----------------------- Create/validate datapackage.json ---------------- #
     data_base_paths <- paste0('data/', name, '_data.csv')
     if (is.null(meta)){ # Create bare
-        message(paste('\nCreating barebones metadata datapackage.json\n',
-                    '- Please add additional information directly in the JSON file.\n'))
+        message(paste('Creating barebones metadata datapackage.json\n',
+                    '- Please add additional information directly in the JSON file. -\n',
+                    '  For more information see: http://dataprotocols.org/data-packages/\n'))
         meta_template(df, data_base_paths) %>%
         toJSON(pretty = T) %>%
         writeLines(con = paste0(name, '/datapackage.json'))
