@@ -7,15 +7,16 @@ file used to create the data set.}
 datapackage_init(df, package_name, meta = NULL, source_cleaner = NULL)
 }
 \arguments{
-\item{df}{The data frame object name of the data frame you would like to convert
-into a data package.}
+\item{df}{The data frame object name of the data frame you would like to
+convert into a data package.}
 
 \item{package_name}{character string name for the data package. Unnecessary
 if the \code{name} field is specified in \code{meta}.}
 
 \item{meta}{The list object name with the data frames meta data. The list
 item names must conform to the Open Knowledge Foundation's Data Package
-Protocol (see \url{http://dataprotocols.org/data-packages/}). If
+Protocol (see \url{http://dataprotocols.org/data-packages/}). \code{dpmr}
+uses \code{\link{jsonlite}} to convert the list into a JSON file. If
 \code{meta = NULL} then a barebones \code{datapackage.json} file will be
 created.}
 
@@ -28,5 +29,8 @@ required, but HIGHLY RECOMMENDED.}
 \description{
 Initialise a data package from a data frame, metadata list, and source code
 file used to create the data set.
+}
+\seealso{
+\code{\link{jsonlite}}
 }
 

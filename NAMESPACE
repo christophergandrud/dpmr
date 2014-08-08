@@ -2,5 +2,6 @@
 
 export(datapackage_init)
 export(datapackage_install)
+export(meta_template)
 importFrom(jsonlite,fromJSON)
 importFrom(magrittr,"%>%")
