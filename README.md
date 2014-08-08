@@ -28,7 +28,7 @@ metadata list, and the source code file used to create the data set.
 
     - [x] Save data frame as csv in *data/*.
 
-    - [ ] Create bare *database.json*, including deriving attributes from the data.
+    - [x] Create bare *database.json*, including deriving attributes from the data.
 
     - [ ] Initialise using info (almost) exclusively from the `meta` *database_list*.
 
