@@ -55,7 +55,7 @@ datapackage_init <- function(df, package_name, meta = NULL,
         writeLines(con = paste0(name, '/datapackage.json'))
     }
     else if (!is.null(meta)){ # Validate user defined
-
+        ######### COMPLETE ##########
     }
 
     #---------------------- Copy source files into scripts ------------------- #
