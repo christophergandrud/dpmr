@@ -10,6 +10,15 @@
 #' @param full_meta logical. Wheter or not to return the full datapackage.json
 #' metadata. Note: when \code{TRUE} only the meta data is returned not the data.
 #'
+#' @examples
+#' \dontrun{
+#' # To load a data package called
+#' # [gdp](https://github.com/datasets/gdp) stored in
+#' # the current working directory use:
+#' gdp_data = datapackage_install(path = 'gdp')
+#' }
+#'
+#'
 #' @importFrom jsonlite fromJSON
 #' @importFrom magrittr %>%
 #' @export

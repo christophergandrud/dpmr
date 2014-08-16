@@ -10,7 +10,7 @@ github_get_conn <- function(repo, username = getOption("github.user"),
                             ref = "master", pull = NULL, subdir = NULL,
                             branch = NULL, auth_user = NULL, password = NULL,
                             auth_token = NULL, ...) {
-
+    github_pull <- NULL
     if (!is.null(branch)) {
         warning("'branch' is deprecated. In the future, please use 'ref' instead.")
         ref <- branch
@@ -71,6 +71,7 @@ github_get_conn <- function(repo, username = getOption("github.user"),
 #' @noRd
 
 github_parse_path <- function(path) {
+    github_pull <- NULL
     username_rx <- "(?:([^/]+)/)?"
     repo_rx <- "([^/@#]+)"
     subdir_rx <- "(?:/([^@#]*[^@#/]))?"

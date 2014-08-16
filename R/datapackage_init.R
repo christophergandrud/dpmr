@@ -18,6 +18,7 @@
 #' required, but HIGHLY RECOMMENDED.
 #'
 #' @seealso \code{\link{jsonlite}}
+#' @importFrom jsonlite toJSON
 #' @importFrom magrittr %>%
 #'
 #' @export

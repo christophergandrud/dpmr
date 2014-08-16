@@ -21,4 +21,12 @@ metadata. Note: when \code{TRUE} only the meta data is returned not the data.}
 \description{
 Install a data package
 }
+\examples{
+\dontrun{
+# To load a data package called
+# [gdp](https://github.com/datasets/gdp) stored in
+# the current working directory use:
+gdp_data = datapackage_install(path = 'gdp')
+}
+}
 

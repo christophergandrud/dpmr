@@ -4,7 +4,7 @@ Description: An R package for creating and installing data packages that follow
     the Open Knowledge Foundation's Data Package Protocol. dpmr
     mirrors functionality in the Node.js package Data Package Manager (dpm).
 Version: 0.1
-Date: 2014-08-08
+Date: 2014-08-13
 Author: Christopher Gandrud
 Maintainer: Christopher Gandrud <christopher.gandrud@gamil.com>
 URL: http://christophergandrud.github.io/dpmr/

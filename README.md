@@ -44,6 +44,29 @@ metadata list, and the source code file used to create the data set.
 
     - [ ] Load data from a GitHub repo.
 
+## Examples
+
+To initiate a barebones data package in the current working directory called
+`MyData` use:
+
+
+```S
+# Create dummy data
+A <- B <- C <- sample(1:20, size = 20, replace = TRUE)
+ID <- sort(rep('a', 20))
+Data <- data.frame(ID, A, B, C)
+
+
+datapackage_init(df = Data, package_name = 'MyData')
+```
+
+To load a data package called [gdp](https://github.com/datasets/gdp) stored in
+the current working directory use:
+
+```S
+gdp_data = datapackage_install(path = 'gdp')
+```
+
 ## Install development build
 
 ```{S}

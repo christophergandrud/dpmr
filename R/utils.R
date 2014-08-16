@@ -11,8 +11,8 @@ meta_template <- function(df, data_paths){
     # Find variable attributes
     ## Find variable classes
     type <- vector()
-    for (i in 1:ncol(Data)){
-        type[i] <- Data[, i] %>% class
+    for (i in 1:ncol(df)){
+        type[i] <- df[, i] %>% class
     }
 
     ## Convert to closest JSON type
