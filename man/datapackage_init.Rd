@@ -16,7 +16,7 @@ if the \code{name} field is specified in \code{meta}.}
 \item{meta}{The list object name with the data frames meta data. The list
 item names must conform to the Open Knowledge Foundation's Data Package
 Protocol (see \url{http://dataprotocols.org/data-packages/}). \code{dpmr}
-uses \code{\link{jsonlite}} to convert the list into a JSON file. If
+uses \code{jsonlite} to convert the list into a JSON file. If
 \code{meta = NULL} then a barebones \code{datapackage.json} file will be
 created.}
 
@@ -29,8 +29,5 @@ required, but HIGHLY RECOMMENDED.}
 \description{
 Initialise a data package from a data frame, metadata list, and source code
 file used to create the data set.
-}
-\seealso{
-\code{\link{jsonlite}}
 }
 

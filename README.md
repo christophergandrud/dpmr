@@ -47,7 +47,7 @@ metadata list, and the source code file used to create the data set.
 ## Examples
 
 To initiate a barebones data package in the current working directory called
-`MyData` use:
+`My_Data_Package` use:
 
 
 ```S
@@ -57,14 +57,14 @@ ID <- sort(rep('a', 20))
 Data <- data.frame(ID, A, B, C)
 
 
-datapackage_init(df = Data, package_name = 'MyData')
+datapackage_init(df = Data, package_name = 'My_Data_Package')
 ```
 
 To load a data package called [gdp](https://github.com/datasets/gdp) stored in
 the current working directory use:
 
 ```S
-gdp_data = datapackage_install(path = 'gdp')
+gdp_data = datapackage_install(path = 'gdp/')
 ```
 
 ## Install development build

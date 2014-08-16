@@ -8,7 +8,7 @@
 #' @param meta The list object name with the data frames meta data. The list
 #' item names must conform to the Open Knowledge Foundation's Data Package
 #' Protocol (see \url{http://dataprotocols.org/data-packages/}). \code{dpmr}
-#' uses \code{\link{jsonlite}} to convert the list into a JSON file. If
+#' uses \code{jsonlite} to convert the list into a JSON file. If
 #' \code{meta = NULL} then a barebones \code{datapackage.json} file will be
 #' created.
 #' @param source_cleaner a character string or vector of file paths pointing to
@@ -17,7 +17,6 @@
 #' the scripts are renamed \code{process*.*}. You can also  \code{source_cleaner} is not
 #' required, but HIGHLY RECOMMENDED.
 #'
-#' @seealso \code{\link{jsonlite}}
 #' @importFrom jsonlite toJSON
 #' @importFrom magrittr %>%
 #'
@@ -69,7 +68,7 @@ datapackage_init <- function(df, package_name, meta = NULL,
 
             file.copy(from = source_cleaner,
                 to = paste0(name, '/scripts/', new_s_name))
-            message(new_s_name)
+            message(paste('-', source_cleaner, '    >>    ', new_s_name))
         }
         else if (length(source_cleaner) > 1){
             for (i in 1:length(source_cleaner)){
@@ -79,7 +78,7 @@ datapackage_init <- function(df, package_name, meta = NULL,
 
                 file.copy(from = source_cleaner[i],
                     to = paste0(name, '/scripts/', new_s_name))
-                message(new_s_name)
+                message(paste('-', source_cleaner[i], '    >>    ', new_s_name))
             }
         }
     }
