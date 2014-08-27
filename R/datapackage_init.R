@@ -67,7 +67,7 @@ datapackage_init <- function(df, package_name, meta = NULL,
             #### To Do ####
             # if (!(list.files() %in% source_cleaner[1]) | )
 
-            new_s_name <- gsub(pattern = '([^.]+)', # alt: '(.*\\/)([^.]+)'
+            new_s_name <- gsub(pattern = '(.*\\/)([^.]+)',
                                 replacement = paste0('process_', i),
                                 x = source_cleaner[i])
 
