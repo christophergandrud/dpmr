@@ -16,6 +16,7 @@
 #' be in R or any other language, e.g. Python. Following Data Package convention
 #' the scripts are renamed \code{process*.*}. You can also  \code{source_cleaner} is not
 #' required, but HIGHLY RECOMMENDED.
+#' @param ... arguments to pass to methods.
 #'
 #' @importFrom jsonlite toJSON
 #' @importFrom magrittr %>%
@@ -23,7 +24,7 @@
 #' @export
 
 datapackage_init <- function(df, package_name, meta = NULL,
-                            source_cleaner = NULL){
+                            source_cleaner = NULL, ...){
     #------------------- Initialize data package directories ----------------- #
     if (!is.null(meta$name)){
         name <- meta$name
@@ -87,5 +88,5 @@ datapackage_init <- function(df, package_name, meta = NULL,
 
     # Write the data file into data/ as a CSV
     message(paste('\nSaving data frame as', data_base_paths))
-    write.csv(df, file = paste0(name, '/', data_base_paths)) # CHANGE NAMING SO THAT IT DRAWS ON META
+    write.csv(df, file = paste0(name, '/', data_base_paths), ...) # CHANGE NAMING SO THAT IT DRAWS ON META
 }
