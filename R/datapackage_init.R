@@ -62,25 +62,18 @@ datapackage_init <- function(df, package_name, meta = NULL,
     #---------------------- Copy source files into scripts ------------------- #
     if (!is.null(source_cleaner)) {
         message('Moving in the source cleaner file(s):')
-        if (length(source_cleaner) == 1) {
-            new_s_name <- source_cleaner %>%
-                            gsub(pattern = '(.*\\/)([^.]+)',
-                                replacement = paste0('process'))
+        for (i in 1:length(source_cleaner)){
+            # Check to see if exists in working directory/valid file path
+            #### To Do ####
+            # if (!(list.files() %in% source_cleaner[1]) | )
 
-            file.copy(from = source_cleaner,
-                to = paste0(name, '/scripts/', new_s_name))
-            message(paste('-', source_cleaner, '    >>    ', new_s_name))
-        }
-        else if (length(source_cleaner) > 1){
-            for (i in 1:length(source_cleaner)){
-                new_s_name <- source_cleaner[i] %>%
-                                gsub(pattern = '(.*\\/)([^.]+)',
-                                    replacement = paste0('process_', i))
+            new_s_name <- gsub(pattern = '([^.]+)', # alt: '(.*\\/)([^.]+)'
+                                replacement = paste0('process_', i),
+                                x = source_cleaner[i])
 
-                file.copy(from = source_cleaner[i],
-                    to = paste0(name, '/scripts/', new_s_name))
-                message(paste('-', source_cleaner[i], '    >>    ', new_s_name))
-            }
+            file.copy(from = source_cleaner[i],
+                        to = paste0(name, '/scripts/', new_s_name))
+            message(paste('-', source_cleaner[i], '    >>    ', new_s_name))
         }
     }
 
