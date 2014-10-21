@@ -1,7 +1,8 @@
 #' Install a data package
 #'
 #' @param path character string path to the data package directory. Can be a
-#' local directory, a remote repository's URL, or a GitHub username/repo.
+#' local directory or a remote repository's URL. Note: if the file is compressed
+#' then it currently must be \code{.zip}.
 #' @param load_file character string specifying the path of the data file to
 #' load into R. The correct file paths will be printed when the function runs.
 #' By default the first file in the datapackage.json path list is
@@ -18,13 +19,24 @@
 #' gdp_data = datapackage_install(path = 'gdp')
 #' }
 #'
-#'
+#' @importFrom downloader
 #' @importFrom jsonlite fromJSON
 #' @importFrom magrittr %>%
 #' @export
 
-datapackage_install <- function(path, load_file = NULL, full_meta = FALSE){
+datapackage_install <- function(path, package_name, load_file,
+    full_meta = FALSE){
     # Determine how to load the data package and place it in a temp directory
+    # Is the file from a url?
+    if (isTRUE(grepl('^http', path))){
+        if (missing(package_name)){
+            
+        }
+
+        download(path, tempfile)
+        if (grepl('.zip'))
+    }
+
     # Is there a non-empty local path?
     NumFiles <- list.files(path) %>% length
     if (NumFiles == 0){
@@ -94,12 +106,12 @@ datapackage_install <- function(path, load_file = NULL, full_meta = FALSE){
         }
 
         # Load data file into workspace
-        if (is.null(load_file)){
+        if (missing(load_file)){
             # Load first file into R
             message(paste('\nLoading into R:', data_files[1]))
             paste0(path, '/', data_files[1]) %>% read.csv(stringsAsFactors = F)
         }
-        else if (!is.null(load_file)) {
+        else if (!missing(load_file)) {
             if (!(load_file %in% data_files)) stop(paste(load_file,
                                 "is not in the data package's resource list."),
                                 call. = FALSE)
