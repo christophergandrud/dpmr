@@ -37,12 +37,28 @@ datapackage_install <- function(path,
 
         # Unzip if  .zip
         if (grepl(pattern = 'zip?', x = URL)) {
-            unzip(temp_path, exdir = 'temp_path_2')
-            zipped_path <- list.files('temp_path_2')
-            comb_unzipped <- paste0('temp_path_2/', zipped_path)
+            temp_path_2 <- paste0('Second', temp_path)
+
+            unzip(temp_path, exdir = temp_path_2)
+
+            zipped_path <- list.files(temp_path_2)
+            if (zipped_path %in% list.files()) {
+                unlink(c(temp_path, temp_path_2), recursive = T)
+                stop(paste('Datapackage', zipped_path, 'already installed.\n',
+                            'Either remove and reinstall or load the data into R using a normal R way.'),
+                    call. = F)
+            }
+
+            comb_unzipped <- paste0(temp_path_2, '/', zipped_path)
+
             file.rename(comb_unzipped, zipped_path)
-            suppressMessages(file.remove(c('temp_path_2', temp_path)))
+
+            suppressMessages(file.remove(c(temp_path_2, temp_path)))
+
             path <- zipped_path
+        }
+        else if (!isTRUE(grepl('^http', path))){
+            path <- temp_path
         }
     }
 
@@ -65,6 +81,10 @@ datapackage_install <- function(path,
         }
     }
     pkg_name <- meta$name # Name is a required field in the protocol
+
+    # Rename downloaded directories
+    if (exists('path')) file.rename(path, pkg_name); path <- pkg_name
+
     if (!is.null(pkg_name)){
         message(paste('\n--------------------------------',
                 '\nLoading data package:', meta$name))
