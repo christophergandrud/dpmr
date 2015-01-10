@@ -14,12 +14,13 @@ convert into a data package.}
 \item{package_name}{character string name for the data package. Unnecessary
 if the \code{name} field is specified in \code{meta}.}
 
-\item{meta}{The list object name with the data frames meta data. The list
+\item{meta}{The list object with the data frame's meta data. The list
 item names must conform to the Open Knowledge Foundation's Data Package
 Protocol (see \url{http://dataprotocols.org/data-packages/}). \code{dpmr}
 uses \code{jsonlite} to convert the list into a JSON file. If
 \code{meta = NULL} then a barebones \code{datapackage.json} file will be
-created.}
+created. If \code{resources} is not specified then this will be automatically
+generated.}
 
 \item{source_cleaner}{a character string or vector of file paths pointing to
 the source code file used to gather and clean the \code{df} data frame. Can
@@ -32,5 +33,16 @@ the scripts are renamed \code{process*.*}. You can also
 \description{
 Initialise a data package from a data frame, metadata list, and source code
 file used to create the data set.
+}
+\examples{
+\dontrun{
+# Create dummy data
+A <- B <- C <- sample(1:20, size = 20, replace = TRUE)
+ID <- sort(rep('a', 20))
+Data <- data.frame(ID, A, B, C)
+
+# Initialise data package
+datapackage_init(df = Data, package_name = 'My_Data_Package')
+}
 }
 

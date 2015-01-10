@@ -5,18 +5,30 @@
 #' convert into a data package.
 #' @param package_name character string name for the data package. Unnecessary
 #' if the \code{name} field is specified in \code{meta}.
-#' @param meta The list object name with the data frames meta data. The list
+#' @param meta The list object with the data frame's meta data. The list
 #' item names must conform to the Open Knowledge Foundation's Data Package
 #' Protocol (see \url{http://dataprotocols.org/data-packages/}). \code{dpmr}
 #' uses \code{jsonlite} to convert the list into a JSON file. If
 #' \code{meta = NULL} then a barebones \code{datapackage.json} file will be
-#' created.
+#' created. If \code{resources} is not specified then this will be automatically
+#' generated.
 #' @param source_cleaner a character string or vector of file paths pointing to
 #' the source code file used to gather and clean the \code{df} data frame. Can
 #' be in R or any other language, e.g. Python. Following Data Package convention
 #' the scripts are renamed \code{process*.*}. You can also
 #' \code{source_cleaner} is not required, but HIGHLY RECOMMENDED.
 #' @param ... arguments to pass to methods.
+#'
+#' @examples
+#' \dontrun{
+#' # Create dummy data
+#' A <- B <- C <- sample(1:20, size = 20, replace = TRUE)
+#' ID <- sort(rep('a', 20))
+#' Data <- data.frame(ID, A, B, C)
+#'
+#' # Initialise data package
+#' datapackage_init(df = Data, package_name = 'My_Data_Package')
+#' }
 #'
 #' @importFrom jsonlite toJSON
 #' @importFrom magrittr %>%
@@ -101,5 +113,5 @@ datapackage_init <- function(df,
 
     # Write the data file into data/ as a CSV
     message(paste('Saving data frame as:', data_base_paths))
-    write.csv(df, file = paste0(name, '/', data_base_paths), ...) # CHANGE NAMING SO THAT IT DRAWS ON META
+    write.csv(df, file = paste0(name, '/', data_base_paths), ...)
 }
