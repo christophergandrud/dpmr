@@ -14,8 +14,8 @@
 #' @param source_cleaner a character string or vector of file paths pointing to
 #' the source code file used to gather and clean the \code{df} data frame. Can
 #' be in R or any other language, e.g. Python. Following Data Package convention
-#' the scripts are renamed \code{process*.*}. You can also  \code{source_cleaner} is not
-#' required, but HIGHLY RECOMMENDED.
+#' the scripts are renamed \code{process*.*}. You can also
+#' \code{source_cleaner} is not required, but HIGHLY RECOMMENDED.
 #' @param ... arguments to pass to methods.
 #'
 #' @importFrom jsonlite toJSON
@@ -23,8 +23,12 @@
 #'
 #' @export
 
-datapackage_init <- function(df, package_name, meta = NULL,
-                            source_cleaner = NULL, ...){
+datapackage_init <- function(df,
+                            package_name,
+                            meta = NULL,
+                            source_cleaner = NULL,
+                            ...)
+{
     #------------------- Initialize data package directories ----------------- #
     if (!is.null(meta$name)){
         name <- meta$name
@@ -41,22 +45,29 @@ datapackage_init <- function(df, package_name, meta = NULL,
                                     call. = F)
 
     message(paste('\n--- Creating the', name,
-            'data package in the working directory. ---\n'))
+            'data package ---\n'))
+    message(paste('Data package created in:', getwd(), '\n'))
     dir.create(name); dir.create(paste0(name, '/data'))
     dir.create(paste0(name, '/scripts'))
 
     #----------------------- Create/validate datapackage.json ---------------- #
     data_base_paths <- paste0('data/', name, '_data.csv')
     if (is.null(meta)){ # Create bare
-        message(paste('Creating barebones metadata datapackage.json\n',
-                    '- Please add additional information directly in the JSON file. -\n',
+        message(paste0('Creating barebones metadata datapackage.json\n',
+                    '- Please add additional information directly in:\n',
+                    '  ', getwd(), '/', name, '/', 'datapackage.json\n\n',
                     '  For more information see: http://dataprotocols.org/data-packages/\n'))
         meta_template(df, data_base_paths) %>%
         toJSON(pretty = T) %>%
         writeLines(con = paste0(name, '/datapackage.json'))
     }
-    else if (!is.null(meta)){ # Validate user defined
-        ######### COMPLETE ##########
+    else if (!is.null(meta)){
+        if (class(meta) != 'list') stop('meta must be a list', .call = F)
+        if (is.null(meta$resoures)) {
+            message('Adding resources to meta.\n')
+            meta <- list(meta, resources_create())
+        }
+
     }
 
     #---------------------- Copy source files into scripts ------------------- #
