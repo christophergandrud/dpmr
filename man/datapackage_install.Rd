@@ -8,8 +8,9 @@ datapackage_install(path, load_file, full_meta = FALSE)
 }
 \arguments{
 \item{path}{character string path to the data package directory. Can be a
-local directory or a URL. Note: if the file is compressed
-then it currently must be \code{.zip}.}
+local directory or a URL. If a URL is given the package will be installed
+in the current working directory. If the file is compressed
+then it currently must be \code{.zip}-ped.}
 
 \item{load_file}{character string specifying the path of the data file to
 load into R. The correct file paths will be printed when the function runs.
@@ -30,7 +31,7 @@ gdp_data = datapackage_install(path = 'gdp')
 
 # Install the gdp data package from GitHub using its .zip URL
 URL <- 'https://github.com/datasets/gdp/archive/master.zip'
-gdp <- datapackage_install(path = URL)
+gdp_data <- datapackage_install(path = URL)
 }
 }
 

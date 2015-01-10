@@ -1,8 +1,9 @@
 #' Install a data package
 #'
 #' @param path character string path to the data package directory. Can be a
-#' local directory or a URL. Note: if the file is compressed
-#' then it currently must be \code{.zip}.
+#' local directory or a URL. If a URL is given the package will be installed
+#' in the current working directory. If the file is compressed
+#' then it currently must be \code{.zip}-ped.
 #' @param load_file character string specifying the path of the data file to
 #' load into R. The correct file paths will be printed when the function runs.
 #' By default the first file in the datapackage.json path list is
@@ -18,7 +19,7 @@
 #'
 #' # Install the gdp data package from GitHub using its .zip URL
 #' URL <- 'https://github.com/datasets/gdp/archive/master.zip'
-#' gdp <- datapackage_install(path = URL)
+#' gdp_data <- datapackage_install(path = URL)
 #' }
 #'
 #' @importFrom digest digest
@@ -30,6 +31,7 @@ datapackage_install <- function(path,
                                 load_file,
                                 full_meta = FALSE)
 {
+    . <- NULL
     # Determine how to load the data package and place it in a temp directory
     # Is the file from a url?
     if (isTRUE(grepl('^http', path))){
@@ -47,7 +49,7 @@ datapackage_install <- function(path,
             if (zipped_path %in% list.files()) {
                 unlink(c(temp_path, temp_path_2), recursive = T)
                 stop(paste('Datapackage', zipped_path, 'already installed.\n',
-                            'Either remove and reinstall or load the data into R using a normal R way.'),
+                    'Either remove and reinstall or load the data into R using a normal R way.'),
                     call. = F)
             }
 

@@ -37,7 +37,7 @@ file used to create the data set.
 }
 \examples{
 \dontrun{
-# Create dummy data
+# Create fake data
 A <- B <- C <- sample(1:20, size = 20, replace = TRUE)
 ID <- sort(rep('a', 20))
 Data <- data.frame(ID, A, B, C)

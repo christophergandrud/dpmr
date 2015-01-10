@@ -3,8 +3,6 @@
 Data Package Manager for R
 ====
 
-**Under Development. Check below for current capabilities.**
-
 [![Build Status](https://travis-ci.org/christophergandrud/dpmr.svg?branch=master)](https://travis-ci.org/christophergandrud/dpmr)
 
 ## Description
@@ -20,7 +18,7 @@ The package will eventually have two core functions:
 - `datapackage_init`: Initialise a data package from a data frame,
 metadata list, and the source code file used to create the data set.
 
-    + To-do for v0.1
+    + To-do for *v0.1*
 
     - [x] Init basic directory structure.
 
@@ -35,13 +33,13 @@ data.
 
 - `datapackage_install`: Load a data package into R.
 
-    + To-do for v0.1
+    + To-do for *v0.1*
 
     - [x] Load data from locally stored data package CSV and return metadata.
 
-    - [X] Load data from a file/zip file at http/https.
+    - [x] Load data from a file/zip file at http/https.
 
-    + To-do for v0.2
+    + To-do for *v0.2*
 
     - [ ] Load inline data from the *datapackage.json* file.
 
@@ -49,30 +47,65 @@ data.
 
 ## Examples
 
+### Create Data Packages
+
 To initiate a barebones data package in the current working directory called
 `My_Data_Package` use:
 
-
-```S
-# Create dummy data
+```r
+# Create fake data
 A <- B <- C <- sample(1:20, size = 20, replace = TRUE)
 ID <- sort(rep('a', 20))
 Data <- data.frame(ID, A, B, C)
 
-
 datapackage_init(df = Data, package_name = 'My_Data_Package')
 ```
 
+This will create a data package with barebones metadata in a
+[datapackage.json](http://dataprotocols.org/data-packages/)
+file. You can then edit this by hand.
+
+Alternatively, you can also create a list with the metadata in R and have this
+included with the data package:
+
+```r
+meta_list <- list(name = 'My_Data_Package',
+                title = 'A fake data package',
+                sources = data.frame(name = 'Fake',
+                                    web = 'No URL, its fake.'))
+
+datapackage_init(df = Data, meta = meta_list)
+```
+
+Note if you don't include the `resources` fields in your metadata list
+ (these identify the data file paths and data `schema`), then they will automatically be added.
+
+### Installing Data Packages
+
+#### Locally
 To load a data package called [gdp](https://github.com/datasets/gdp) stored in
 the current working directory use:
 
-```S
+```r
 gdp_data <- datapackage_install(path = 'gdp/')
 ```
 
-## Install development build
+#### From the web
 
-```{S}
+Or you can install a package stored remotely using its URL. In this example
+we directly download the gdp data package from GitHub using the URL for its
+zip file:
+
+```r
+URL <- 'https://github.com/datasets/gdp/archive/master.zip'
+gdp_data <- datapackage_install(path = URL)
+```
+
+## Install R package
+
+To install the *dpmr* package use:
+
+```r
 devtools::install_github('christophergandrud/dpmr')
 ```
 
