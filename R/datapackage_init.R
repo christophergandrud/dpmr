@@ -36,7 +36,7 @@
 #' @export
 
 datapackage_init <- function(df,
-                            package_name,
+                            package_name = NULL,
                             meta = NULL,
                             source_cleaner = NULL,
                             ...)
@@ -46,7 +46,8 @@ datapackage_init <- function(df,
         name <- meta$name
     }
     else if (is.null(meta$name)){
-        if (is.null(package_name)) stop('Must specify package name.', call. = F)
+        if (is.null(package_name)) stop("Must specify the data package's name.",
+                                        call. = F)
         name <- package_name
     }
     name <- gsub(name, pattern = ' ', replacement = '') # strip name whitespace
@@ -74,7 +75,7 @@ datapackage_init <- function(df,
         writeLines(con = paste0(name, '/datapackage.json'))
     }
     else if (!is.null(meta)){
-        if (class(meta) != 'list') stop('meta must be a list', .call = F)
+        if (class(meta) != 'list') stop('meta must be a list', call. = F)
 
         if (is.null(meta$resources)) {
             message('Adding resources to meta saved in datapackage.json.\n')

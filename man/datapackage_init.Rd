@@ -5,7 +5,8 @@
 \title{Initialise a data package from a data frame, metadata list, and source code
 file used to create the data set.}
 \usage{
-datapackage_init(df, package_name, meta = NULL, source_cleaner = NULL, ...)
+datapackage_init(df, package_name = NULL, meta = NULL,
+  source_cleaner = NULL, ...)
 }
 \arguments{
 \item{df}{The object name of the data frame you would like to convert into a

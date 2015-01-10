@@ -25,10 +25,12 @@ Install a data package
 }
 \examples{
 \dontrun{
-# To load a data package called
-# gdp \\url{https://github.com/datasets/gdp} stored in
-# the current working directory use:
+# Load a data package called gdp stored in the current working directory:
 gdp_data = datapackage_install(path = 'gdp')
+
+# Install the gdp data package from GitHub using its .zip URL
+URL <- 'https://github.com/datasets/gdp/archive/master.zip'
+gdp <- datapackage_install(path = URL)
 }
 }
 

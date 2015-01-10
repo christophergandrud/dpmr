@@ -28,9 +28,10 @@ metadata list, and the source code file used to create the data set.
 
     - [x] Save data frame as csv in *data/*.
 
-    - [x] Create bare *database.json*, including deriving attributes from the data.
+    - [x] Create bare *database.json*, including deriving attributes from the
+data.
 
-    - [x] Initialise using info (almost) exclusively from the `meta` *database_list*.
+    - [x] Initialise using info (almost) exclusively from the `meta`.
 
 - `datapackage_install`: Load a data package into R.
 
@@ -38,11 +39,13 @@ metadata list, and the source code file used to create the data set.
 
     - [x] Load data from locally stored data package CSV and return metadata.
 
+    - [X] Load data from a file/zip file at http/https.
+
+    + To-do for v0.2
+
     - [ ] Load inline data from the *datapackage.json* file.
 
-    - [ ] Load data from a zip file at http.
-
-    - [ ] Load data from a GitHub repo.
+    - [ ] Load data from a GitHub repo using the GitHub username and repo.
 
 ## Examples
 
