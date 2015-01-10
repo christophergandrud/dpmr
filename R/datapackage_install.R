@@ -1,51 +1,53 @@
 #' Install a data package
 #'
 #' @param path character string path to the data package directory. Can be a
-#' local directory or a remote repository's URL. Note: if the file is compressed
+#' local directory or a URL. Note: if the file is compressed
 #' then it currently must be \code{.zip}.
 #' @param load_file character string specifying the path of the data file to
 #' load into R. The correct file paths will be printed when the function runs.
 #' By default the first file in the datapackage.json path list is
 #' loaded. Can only be a CSV formatted file currently.
-#' Note: unfortunately R only allows one file to be returned at a time.
+#' Note: only one file can be loaded at a time.
 #' @param full_meta logical. Wheter or not to return the full datapackage.json
 #' metadata. Note: when \code{TRUE} only the meta data is returned not the data.
 #'
 #' @examples
 #' \dontrun{
 #' # To load a data package called
-#' # [gdp](https://github.com/datasets/gdp) stored in
+#' # gdp \url{https://github.com/datasets/gdp} stored in
 #' # the current working directory use:
 #' gdp_data = datapackage_install(path = 'gdp')
 #' }
 #'
-#' @importFrom downloader
+#' @importFrom digest digest
 #' @importFrom jsonlite fromJSON
 #' @importFrom magrittr %>%
 #' @export
 
-datapackage_install <- function(path, package_name, load_file,
-    full_meta = FALSE){
+datapackage_install <- function(path,
+                                load_file,
+                                full_meta = FALSE)
+{
     # Determine how to load the data package and place it in a temp directory
     # Is the file from a url?
     if (isTRUE(grepl('^http', path))){
-        if (missing(package_name)){
-            
+        URL <- path
+        temp_path <- digest(URL) %>% paste0('temp_', .)
+        download(path = temp_path, url = URL)
+
+        # Unzip if  .zip
+        if (grepl(pattern = 'zip?', x = URL)) {
+            unzip(temp_path, exdir = 'temp_path_2')
+            zipped_path <- list.files('temp_path_2')
+            comb_unzipped <- paste0('temp_path_2/', zipped_path)
+            file.rename(comb_unzipped, zipped_path)
+            suppressMessages(file.remove(c('temp_path_2', temp_path)))
+            path <- zipped_path
         }
-
-        download(path, tempfile)
-        if (grepl('.zip'))
-    }
-
-    # Is there a non-empty local path?
-    NumFiles <- list.files(path) %>% length
-    if (NumFiles == 0){
-        # Fill in with remote repo downloaders
-        # path <- tmp
     }
 
     # Parse the datapackage.json file to find the resources
-    meta <- paste0(path, '/datapackage.json') %>% jsonlite::fromJSON()
+    meta <- paste0(path, '/datapackage.json') %>% fromJSON()
 
     #### Return background information to user ------------------------------- #
     meta_message <- function(field, pre_field){

@@ -5,12 +5,13 @@
 #' data package.
 #' @param package_name character string name for the data package. Unnecessary
 #' if the \code{name} field is specified in \code{meta}.
-#' @param meta The list object name with the data frames meta data. The list
+#' @param meta The list object with the data frame's meta data. The list
 #' item names must conform to the Open Knowledge Foundation's Data Package
 #' Protocol (see \url{http://dataprotocols.org/data-packages/}). \code{dpmr}
 #' uses \code{jsonlite} to convert the list into a JSON file. If
 #' \code{meta = NULL} then a barebones \code{datapackage.json} file will be
-#' created.
+#' created. If \code{resources} is not specified then this will be automatically
+#' generated.
 #' @param source_cleaner a character string or vector of file paths pointing to
 #' the source code file used to gather and clean the \code{df} data frame. Can
 #' be in R or any other language, e.g. Python. Following Data Package convention
@@ -18,13 +19,28 @@
 #' \code{source_cleaner} is not required, but HIGHLY RECOMMENDED.
 #' @param ... arguments to pass to methods.
 #'
+#' @examples
+#' \dontrun{
+#' # Create dummy data
+#' A <- B <- C <- sample(1:20, size = 20, replace = TRUE)
+#' ID <- sort(rep('a', 20))
+#' Data <- data.frame(ID, A, B, C)
+#'
+#' # Initialise data package
+#' datapackage_init(df = Data, package_name = 'My_Data_Package')
+#' }
+#'
 #' @importFrom jsonlite toJSON
 #' @importFrom magrittr %>%
 #'
 #' @export
 
-datapackage_init <- function(df, package_name, meta = NULL,
-                            source_cleaner = NULL, ...){
+datapackage_init <- function(df,
+                            package_name,
+                            meta = NULL,
+                            source_cleaner = NULL,
+                            ...)
+{
     #------------------- Initialize data package directories ----------------- #
     if (!is.null(meta$name)){
         name <- meta$name
@@ -41,22 +57,38 @@ datapackage_init <- function(df, package_name, meta = NULL,
                                     call. = F)
 
     message(paste('\n--- Creating the', name,
-            'data package in the working directory. ---\n'))
+            'data package ---\n'))
+    message(paste('Data package created in:', getwd(), '\n'))
     dir.create(name); dir.create(paste0(name, '/data'))
     dir.create(paste0(name, '/scripts'))
 
     #----------------------- Create/validate datapackage.json ---------------- #
     data_base_paths <- paste0('data/', name, '_data.csv')
     if (is.null(meta)){ # Create bare
-        message(paste('Creating barebones metadata datapackage.json\n',
-                    '- Please add additional information directly in the JSON file. -\n',
+        message(paste0('Creating barebones metadata datapackage.json\n',
+                    '- Please add additional information directly in:\n',
+                    '  ', getwd(), '/', name, '/', 'datapackage.json\n\n',
                     '  For more information see: http://dataprotocols.org/data-packages/\n'))
-        meta_template(df, data_base_paths) %>%
+        meta_template(df = df, name = name, data_paths = data_base_paths) %>%
         toJSON(pretty = T) %>%
         writeLines(con = paste0(name, '/datapackage.json'))
     }
-    else if (!is.null(meta)){ # Validate user defined
-        ######### COMPLETE ##########
+    else if (!is.null(meta)){
+        if (class(meta) != 'list') stop('meta must be a list', .call = F)
+
+        if (is.null(meta$resources)) {
+            message('Adding resources to meta saved in datapackage.json.\n')
+            list(meta, resources_create(data_paths = data_base_paths,
+                                        df = df)) %>%
+                toJSON(pretty = T) %>%
+                writeLines(con = paste0(name, '/datapackage.json'))
+        }
+
+        else if (!is.null(meta$resources)){
+            message('Meta data saved in: datapackage.json\n')
+            meta %>% toJSON(pretty = T) %>%
+            writeLines(con = paste0(name, '/datapackage.json'))
+        }
     }
 
     #---------------------- Copy source files into scripts ------------------- #
@@ -80,6 +112,6 @@ datapackage_init <- function(df, package_name, meta = NULL,
     #--- TO-DO Validate Data Frame using testdat ----------------------------- #
 
     # Write the data file into data/ as a CSV
-    message(paste('\nSaving data frame as', data_base_paths))
-    write.csv(df, file = paste0(name, '/', data_base_paths), ...) # CHANGE NAMING SO THAT IT DRAWS ON META
+    message(paste('Saving data frame as:', data_base_paths))
+    write.csv(df, file = paste0(name, '/', data_base_paths), ...)
 }

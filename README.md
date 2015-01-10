@@ -30,7 +30,7 @@ metadata list, and the source code file used to create the data set.
 
     - [x] Create bare *database.json*, including deriving attributes from the data.
 
-    - [ ] Initialise using info (almost) exclusively from the `meta` *database_list*.
+    - [x] Initialise using info (almost) exclusively from the `meta` *database_list*.
 
 - `datapackage_install`: Load a data package into R.
 
@@ -64,7 +64,7 @@ To load a data package called [gdp](https://github.com/datasets/gdp) stored in
 the current working directory use:
 
 ```S
-gdp_data = datapackage_install(path = 'gdp/')
+gdp_data <- datapackage_install(path = 'gdp/')
 ```
 
 ## Install development build
