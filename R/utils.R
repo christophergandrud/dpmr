@@ -2,14 +2,15 @@
 #'
 #' @param df The data frame object name of the data frame you would like to
 #' convert into a data package.
+#' @param name character string name of the datapackage.
 #' @param data_paths character vector of df paths.
 #'
 #'
 #' @keywords helpers
 #' @export
 
-meta_template <- function(df, data_paths){
-    out <- list(name = 'Test',
+meta_template <- function(df, name, data_paths){
+    out <- list(name = name,
         title = '',
         description = '',
         maintainer = '',

@@ -4,11 +4,13 @@
 \alias{meta_template}
 \title{Template for datapackage.json}
 \usage{
-meta_template(df, data_paths)
+meta_template(df, name, data_paths)
 }
 \arguments{
 \item{df}{The data frame object name of the data frame you would like to
 convert into a data package.}
+
+\item{name}{character string name of the datapackage.}
 
 \item{data_paths}{character vector of df paths.}
 }

@@ -57,17 +57,26 @@ datapackage_init <- function(df,
                     '- Please add additional information directly in:\n',
                     '  ', getwd(), '/', name, '/', 'datapackage.json\n\n',
                     '  For more information see: http://dataprotocols.org/data-packages/\n'))
-        meta_template(df, data_base_paths) %>%
+        meta_template(df = df, name = name, data_paths = data_base_paths) %>%
         toJSON(pretty = T) %>%
         writeLines(con = paste0(name, '/datapackage.json'))
     }
     else if (!is.null(meta)){
         if (class(meta) != 'list') stop('meta must be a list', .call = F)
-        if (is.null(meta$resoures)) {
-            message('Adding resources to meta.\n')
-            meta <- list(meta, resources_create())
+
+        if (is.null(meta$resources)) {
+            message('Adding resources to meta saved in datapackage.json.\n')
+            list(meta, resources_create(data_paths = data_base_paths,
+                                        df = df)) %>%
+                toJSON(pretty = T) %>%
+                writeLines(con = paste0(name, '/datapackage.json'))
         }
 
+        else if (!is.null(meta$resources)){
+            message('Meta data saved in: datapackage.json\n')
+            meta %>% toJSON(pretty = T) %>%
+            writeLines(con = paste0(name, '/datapackage.json'))
+        }
     }
 
     #---------------------- Copy source files into scripts ------------------- #
@@ -91,6 +100,6 @@ datapackage_init <- function(df,
     #--- TO-DO Validate Data Frame using testdat ----------------------------- #
 
     # Write the data file into data/ as a CSV
-    message(paste('\nSaving data frame as', data_base_paths))
+    message(paste('Saving data frame as:', data_base_paths))
     write.csv(df, file = paste0(name, '/', data_base_paths), ...) # CHANGE NAMING SO THAT IT DRAWS ON META
 }
