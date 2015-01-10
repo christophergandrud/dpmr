@@ -1,8 +1,8 @@
 #' Initialise a data package from a data frame, metadata list, and source code
 #' file used to create the data set.
 #'
-#' @param df The data frame object name of the data frame you would like to
-#' convert into a data package.
+#' @param df The object name of the data frame you would like to convert into a
+#' data package.
 #' @param package_name character string name for the data package. Unnecessary
 #' if the \code{name} field is specified in \code{meta}.
 #' @param meta The list object name with the data frames meta data. The list
@@ -14,8 +14,8 @@
 #' @param source_cleaner a character string or vector of file paths pointing to
 #' the source code file used to gather and clean the \code{df} data frame. Can
 #' be in R or any other language, e.g. Python. Following Data Package convention
-#' the scripts are renamed \code{process*.*}. You can also  \code{source_cleaner} is not
-#' required, but HIGHLY RECOMMENDED.
+#' the scripts are renamed \code{process*.*}. You can also
+#' \code{source_cleaner} is not required, but HIGHLY RECOMMENDED.
 #' @param ... arguments to pass to methods.
 #'
 #' @importFrom jsonlite toJSON
