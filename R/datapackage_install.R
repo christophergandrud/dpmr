@@ -6,7 +6,7 @@
 #' load into R. The correct file paths will be printed when the function runs.
 #' By default the first file in the datapackage.json path list is
 #' loaded. Can only be a CSV formatted file currently.
-#' Note: unfortunately R only allows one file to be returned at a time.
+#' Note: only one file can be loaded at a time.
 #' @param full_meta logical. Wheter or not to return the full datapackage.json
 #' metadata. Note: when \code{TRUE} only the meta data is returned not the data.
 #'
