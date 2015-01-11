@@ -42,6 +42,8 @@ datapackage_init <- function(df,
                             ...)
 {
     #------------------- Initialize data package directories ----------------- #
+    if (missing(df)) stop('df must be specified.', call. = F)
+
     if (!is.null(meta$name)){
         name <- meta$name
     }

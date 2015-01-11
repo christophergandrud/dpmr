@@ -16,3 +16,5 @@ Imports:
     httr,
     jsonlite,
     magrittr
+Suggests:
+    devtools
