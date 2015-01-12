@@ -35,7 +35,7 @@ datapackage_info <- function(path,
 
     else if (class(path) == 'list') meta <- path
 
-    message(paste('--', meta$title, '--\n'))
+    message(paste('--', meta$title[[1]], '--\n'))
 
     meta_message('version', 'Version:', meta_in = meta)
     meta_message('datapackage_version', 'Version:', meta_in = meta)

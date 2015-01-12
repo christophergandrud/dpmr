@@ -87,16 +87,19 @@ download <- function(path, url, ...) {
 
 meta_message <- function(field, pre_field, meta_in = meta){
     meta <- NULL
-    fields <- unlist(meta_in[field])
-    if (!is.null(fields)){
-        if (length(fields) == 1){
-            message(paste(pre_field, fields))
-        }
-        else if (length(fields) > 1){
-            message(paste(pre_field))
-            for (u in 1:length(fields)) {
-                fields[[u]] %>% message(paste())
+    if ((field %in% names(meta_in))) {
+        fields <- unlist(meta_in[field])
+        if (!is.null(fields)){
+            if (length(fields) == 1){
+                message(paste(pre_field, fields))
+            }
+            else if (length(fields) > 1){
+                message(paste(pre_field))
+                for (u in 1:length(fields)) {
+                    fields[[u]] %>% message(paste())
+                }
             }
         }
     }
+    else return('')
 }
