@@ -49,6 +49,8 @@ included with the data package:
 ```r
 meta_list <- list(name = 'My_Data_Package',
                 title = 'A fake data package',
+                last_updated = Sys.Date(),
+                version = '0.1',
                 sources = data.frame(name = 'Fake',
                                     web = 'No URL, its fake.'))
 

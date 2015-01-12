@@ -6,7 +6,7 @@
 file used to create the data set.}
 \usage{
 datapackage_init(df, package_name = NULL, meta = NULL,
-  source_cleaner = NULL, ...)
+  source_cleaner = NULL, source_cleaner_rename = TRUE, ...)
 }
 \arguments{
 \item{df}{The object name of the data frame you would like to convert into a
@@ -28,6 +28,9 @@ the source code file used to gather and clean the \code{df} data frame. Can
 be in R or any other language, e.g. Python. Following Data Package convention
 the scripts are renamed \code{process*.*}. You can also
 \code{source_cleaner} is not required, but HIGHLY RECOMMENDED.}
+
+\item{source_cleaner_rename}{logical. Whether or not to rename the
+\code{source_cleaner} files.}
 
 \item{...}{arguments to pass to methods.}
 }

@@ -17,6 +17,8 @@
 #' be in R or any other language, e.g. Python. Following Data Package convention
 #' the scripts are renamed \code{process*.*}. You can also
 #' \code{source_cleaner} is not required, but HIGHLY RECOMMENDED.
+#' @param source_cleaner_rename logical. Whether or not to rename the 
+#' \code{source_cleaner} files.
 #' @param ... arguments to pass to methods.
 #'
 #' @examples
@@ -39,6 +41,7 @@ datapackage_init <- function(df,
                             package_name = NULL,
                             meta = NULL,
                             source_cleaner = NULL,
+                            source_cleaner_rename = TRUE,
                             ...)
 {
     #------------------- Initialize data package directories ----------------- #
@@ -100,11 +103,17 @@ datapackage_init <- function(df,
         for (i in 1:length(source_cleaner)){
             # Check to see if exists in working directory/valid file path
             #### To Do ####
-            # if (!(list.files() %in% source_cleaner[1]) | )
-
-            new_s_name <- gsub(pattern = '(.*\\/)([^.]+)',
-                                replacement = paste0('process_', i),
-                                x = source_cleaner[i])
+            # if (!(source_cleaner %in% list.files(path))) stop('source_cleaner files not found'.)
+            if (isTRUE(source_cleaner_rename)){
+                new_s_name <- gsub(pattern = '(.*\\/)([^.]+)',
+                                   replacement = paste0('process_', i),
+                                   x = source_cleaner[i])                
+            }
+            else {
+                new_s_name <- gsub(pattern = '(.*\\/)',
+                                   replacement = '',
+                                   x = source_cleaner[i])                 
+            }
 
             file.copy(from = source_cleaner[i],
                         to = paste0(name, '/scripts/', new_s_name))

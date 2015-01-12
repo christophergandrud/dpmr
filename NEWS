@@ -1,5 +1,10 @@
 # Changes to the package will be documented here
 
+## Version 0.1.2
+
+- Added `source_cleaner_rename` to `datapackage_init` allowing the user to 
+specify whether or not to rename `source_cleaner` files.
+
 ## Version 0.1.1
 
 - `datapackage_info` function added. This function returns a data package's
