@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>dpmr by christophergandrud</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>dpmr</h1>
+        <h2>Data Package Manager for R</h2>
+        <a href="https://github.com/christophergandrud/dpmr" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <p><a href=""><img src="img/logo.png" align="right" height="80" alt="dmpr logo"></a></p>
+
+<h1>
+<a id="data-package-manager-for-r" class="anchor" href="#data-package-manager-for-r" aria-hidden="true"><span class="octicon octicon-link"></span></a>Data Package Manager for R</h1>
+
+<p><a href="https://travis-ci.org/christophergandrud/dpmr"><img src="https://travis-ci.org/christophergandrud/dpmr.svg?branch=master" alt="Build Status"></a></p>
+
+<h2>
+<a id="description" class="anchor" href="#description" aria-hidden="true"><span class="octicon octicon-link"></span></a>Description</h2>
+
+<p>The R package for creating and installing data packages that follow the
+<a href="https://okfn.org/">Open Knowledge Foundation</a>'s
+<a href="http://dataprotocols.org/data-packages/">Data Package Protocol</a>.</p>
+
+<p><strong>dpmr</strong> has three core functions:</p>
+
+<ul>
+<li><p><code>datapackage_init</code>: initialises a new data package from an R data frame and
+(optionally) a meta data list.</p></li>
+<li><p><code>datapackage_install</code>: installs a data package either stored locally or
+remotely, e.g. on GitHub.</p></li>
+<li><p><code>datapackage_info:</code> reads a data package's metadata (stored in its
+<em><a href="http://dataprotocols.org/data-packages/">datapackage.json</a></em>
+file) into the R Console and (optionally) as a list.</p></li>
+</ul>
+
+<h2>
+<a id="examples" class="anchor" href="#examples" aria-hidden="true"><span class="octicon octicon-link"></span></a>Examples</h2>
+
+<h3>
+<a id="create-data-packages" class="anchor" href="#create-data-packages" aria-hidden="true"><span class="octicon octicon-link"></span></a>Create Data Packages</h3>
+
+<p>To initiate a barebones data package in the current working directory called
+<code>My_Data_Package</code> use:</p>
+
+<div class="highlight highlight-r"><pre><span class="pl-c"># Create fake data</span>
+<span class="pl-vo">A</span> <span class="pl-k">&lt;-</span> <span class="pl-vo">B</span> <span class="pl-k">&lt;-</span> <span class="pl-vo">C</span> <span class="pl-k">&lt;-</span> sample(<span class="pl-c1">1</span><span class="pl-k">:</span><span class="pl-c1">20</span>, <span class="pl-v">size</span> <span class="pl-k">=</span> <span class="pl-c1">20</span>, <span class="pl-v">replace</span> <span class="pl-k">=</span> <span class="pl-c1">TRUE</span>)
+<span class="pl-vo">ID</span> <span class="pl-k">&lt;-</span> sort(rep(<span class="pl-s1"><span class="pl-pds">'</span>a<span class="pl-pds">'</span></span>, <span class="pl-c1">20</span>))
+<span class="pl-vo">Data</span> <span class="pl-k">&lt;-</span> <span class="pl-st">data.frame</span>(<span class="pl-vo">ID</span>, <span class="pl-vo">A</span>, <span class="pl-vo">B</span>, <span class="pl-vo">C</span>)
+
+datapackage_init(<span class="pl-v">df</span> <span class="pl-k">=</span> <span class="pl-vo">Data</span>, <span class="pl-v">package_name</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">'</span>My_Data_Package<span class="pl-pds">'</span></span>)</pre></div>
+
+<p>This will create a data package with barebones metadata in a
+<em><a href="http://dataprotocols.org/data-packages/">datapackage.json</a></em>
+file. You can then edit this by hand.</p>
+
+<p>Alternatively, you can also create a list with the metadata in R and have this
+included with the data package:</p>
+
+<div class="highlight highlight-r"><pre><span class="pl-vo">meta_list</span> <span class="pl-k">&lt;-</span> <span class="pl-st">list</span>(<span class="pl-v">name</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">'</span>My_Data_Package<span class="pl-pds">'</span></span>,
+                <span class="pl-v">title</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">'</span>A fake data package<span class="pl-pds">'</span></span>,
+                <span class="pl-v">sources</span> <span class="pl-k">=</span> <span class="pl-st">data.frame</span>(<span class="pl-v">name</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">'</span>Fake<span class="pl-pds">'</span></span>,
+                                    <span class="pl-v">web</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">'</span>No URL, its fake.<span class="pl-pds">'</span></span>))
+
+datapackage_init(<span class="pl-v">df</span> <span class="pl-k">=</span> <span class="pl-vo">Data</span>, <span class="pl-v">meta</span> <span class="pl-k">=</span> <span class="pl-vo">meta_list</span>)</pre></div>
+
+<p>Note if you don't include the <code>resources</code> fields in your metadata list, then they will automatically be added. These fields identify
+the data files' paths and data <code>schema</code>.</p>
+
+<h3>
+<a id="installing-data-packages" class="anchor" href="#installing-data-packages" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installing Data Packages</h3>
+
+<h4>
+<a id="locally" class="anchor" href="#locally" aria-hidden="true"><span class="octicon octicon-link"></span></a>Locally</h4>
+
+<p>To load a data package called <a href="https://github.com/datasets/gdp">gdp</a> stored in
+the current working directory use:</p>
+
+<div class="highlight highlight-r"><pre><span class="pl-vo">gdp_data</span> <span class="pl-k">&lt;-</span> datapackage_install(<span class="pl-v">path</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">'</span>gdp/<span class="pl-pds">'</span></span>)</pre></div>
+
+<h4>
+<a id="from-the-web" class="anchor" href="#from-the-web" aria-hidden="true"><span class="octicon octicon-link"></span></a>From the web</h4>
+
+<p>You can install a package stored remotely using its URL. In this example
+we directly download the gdp data package from GitHub using the URL for its
+zip file:</p>
+
+<div class="highlight highlight-r"><pre><span class="pl-vo">URL</span> <span class="pl-k">&lt;-</span> <span class="pl-s1"><span class="pl-pds">'</span>https://github.com/datasets/gdp/archive/master.zip<span class="pl-pds">'</span></span>
+<span class="pl-vo">gdp_data</span> <span class="pl-k">&lt;-</span> datapackage_install(<span class="pl-v">path</span> <span class="pl-k">=</span> <span class="pl-vo">URL</span>)</pre></div>
+
+<h2>
+<a id="get-data-package-metadata" class="anchor" href="#get-data-package-metadata" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get Data Package Metadata</h2>
+
+<p>Use <code>datapackage_info</code> to read a data package's metadata into R:</p>
+
+<div class="highlight highlight-r"><pre><span class="pl-c"># Print information when working directory is a data package</span>
+datapackage_info()</pre></div>
+
+<h2>
+<a id="install-dpmr-r-package" class="anchor" href="#install-dpmr-r-package" aria-hidden="true"><span class="octicon octicon-link"></span></a>Install dpmr R package</h2>
+
+<p>To install the <em>dpmr</em> package use:</p>
+
+<div class="highlight highlight-r"><pre><span class="pl-e">devtools</span><span class="pl-k">::</span>install_github(<span class="pl-s1"><span class="pl-pds">'</span>christophergandrud/dpmr<span class="pl-pds">'</span></span>)</pre></div>
+
+<h2>
+<a id="to-do-for-v02" class="anchor" href="#to-do-for-v02" aria-hidden="true"><span class="octicon octicon-link"></span></a>To-do for <em>v0.2</em>
+</h2>
+
+<ul>
+<li><p>[ ] Load inline data from the <em>datapackage.json</em> file.</p></li>
+<li><p>[ ] Load data from a GitHub repo using GitHub usernames and repos.</p></li>
+</ul>
+
+<hr>
+
+<p><a href="http://nadrosia.tumblr.com/post/53520500877/made-in-berlin-badge-update"><img src="http://media.tumblr.com/023c285c14ef01953d3b67ffe789004d/tumblr_inline_mor1uu2OOZ1qz4rgp.png" height="100" align="right"></a></p>
+
+<p>Licensed under
+<a href="LICENSE.md">GPL-3</a></p>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/christophergandrud/dpmr/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/christophergandrud/dpmr/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/christophergandrud/dpmr"></a> is maintained by <a href="https://github.com/christophergandrud">christophergandrud</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
