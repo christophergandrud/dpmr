@@ -78,3 +78,25 @@ download <- function(path, url, ...) {
     stop_for_status(request)
     writeBin(content(request, "raw"), path)
 }
+
+#' Return key metadata to console
+#' @importFrom magrittr %>%
+#'
+#' @keywords internals
+#' @noRd
+
+meta_message <- function(field, pre_field, meta_in = meta){
+    meta <- NULL
+    fields <- unlist(meta_in[field])
+    if (!is.null(fields)){
+        if (length(fields) == 1){
+            message(paste(pre_field, fields))
+        }
+        else if (length(fields) > 1){
+            message(paste(pre_field))
+            for (u in 1:length(fields)) {
+                fields[[u]] %>% message(paste())
+            }
+        }
+    }
+}

@@ -69,21 +69,6 @@ datapackage_install <- function(path,
     # Parse the datapackage.json file to find the resources
     meta <- paste0(path, '/datapackage.json') %>% fromJSON()
 
-    #### Return background information to user ------------------------------- #
-    meta_message <- function(field, pre_field){
-        fields <- unlist(meta[field])
-        if (!is.null(fields)){
-            if (length(fields) == 1){
-                message(paste(pre_field, fields))
-            }
-            else if (length(fields) > 1){
-                message(paste(pre_field))
-                for (u in 1:length(fields)) {
-                    fields[[u]] %>% message(paste())
-                }
-            }
-        }
-    }
     pkg_name <- meta$name # Name is a required field in the protocol
 
     # Rename downloaded directories
@@ -96,20 +81,7 @@ datapackage_install <- function(path,
     else if (is.null(pkg_name)){
         stop('Properly documented data package not found.', call. = F)
     }
-    if (!is.null(meta$title)) message(paste('--', meta$title, '--'))
-
-    meta_message('version', 'Version:')
-    meta_message('datapackage_version', 'Version:')
-    meta_message('last_updated', 'Last updated:')
-    meta_message('description', 'Description:')
-    meta_message('license', 'License:')
-    meta_message('licenses', 'Licenses:')
-    meta_message('homepage', 'Homepage:')
-    meta_message('maintainer', 'Maintainers:')
-    meta_message('contributors', 'Contributors:')
-    meta_message('sources', 'Sources:')
-
-    message('\n----')
+    if (!is.null(meta$title)) datapackage_info(meta)
 
     #### Return requested objects to the workspace---------------------------- #
     if (isTRUE(full_meta)) {

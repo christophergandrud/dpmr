@@ -1,1 +1,6 @@
 # Changes to the package will be documented here
+
+## Version 0.1.1
+
+- `datapackage_info` function added. This function returns a data package's
+metadata to the Console and as a list.

@@ -3,8 +3,8 @@ Title: Data Package Manager for R
 Description: An R package for creating and installing data packages that follow
     the Open Knowledge Foundation's Data Package Protocol. dpmr
     mirrors functionality in the Node.js package Data Package Manager (dpm).
-Version: 0.1
-Date: 2015-01-10
+Version: 0.1.1
+Date: 2015-01-12
 Authors@R: as.person(c(
     "Christopher Gandrud <christopher.gandrud@gmail.com> [aut, cre, cph]"
     ))

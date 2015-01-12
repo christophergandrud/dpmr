@@ -7,43 +7,21 @@ Data Package Manager for R
 
 ## Description
 
-An R package for creating and installing data packages that follow the
+The R package for creating and installing data packages that follow the
 [Open Knowledge Foundation](https://okfn.org/)'s
 [Data Package Protocol](http://dataprotocols.org/data-packages/).
-The package largely mirrors functionality in the Node.js package
-[Data Package Manager (dpm)](https://github.com/okfn/dpm).
 
-The package will eventually have two core functions:
+**dpmr** has three core functions:
 
-- `datapackage_init`: Initialise a data package from a data frame,
-metadata list, and the source code file used to create the data set.
+- `datapackage_init`: initialises a new data package from an R data frame and
+(optionally) a meta data list.
 
-    + To-do for *v0.1*
+- `datapackage_install`: installs a data package either stored locally or
+remotely, e.g. on GitHub.
 
-    - [x] Init basic directory structure.
-
-    - [x] Move cleaner scripts in to *scripts/*.
-
-    - [x] Save data frame as csv in *data/*.
-
-    - [x] Create bare *database.json*, including deriving attributes from the
-data.
-
-    - [x] Initialise using info (almost) exclusively from the `meta`.
-
-- `datapackage_install`: Load a data package into R.
-
-    + To-do for *v0.1*
-
-    - [x] Load data from locally stored data package CSV and return metadata.
-
-    - [x] Load data from a file/zip file at http/https.
-
-    + To-do for *v0.2*
-
-    - [ ] Load inline data from the *datapackage.json* file.
-
-    - [ ] Load data from a GitHub repo using the GitHub username and repo.
+- `datapackage_info:` reads a data package's metadata (stored in its
+*[datapackage.json](http://dataprotocols.org/data-packages/)*
+file) into the R Console and (optionally) as a list.
 
 ## Examples
 
@@ -62,7 +40,7 @@ datapackage_init(df = Data, package_name = 'My_Data_Package')
 ```
 
 This will create a data package with barebones metadata in a
-[datapackage.json](http://dataprotocols.org/data-packages/)
+*[datapackage.json](http://dataprotocols.org/data-packages/)*
 file. You can then edit this by hand.
 
 Alternatively, you can also create a list with the metadata in R and have this
@@ -77,8 +55,8 @@ meta_list <- list(name = 'My_Data_Package',
 datapackage_init(df = Data, meta = meta_list)
 ```
 
-Note if you don't include the `resources` fields in your metadata list
- (these identify the data file paths and data `schema`), then they will automatically be added.
+Note if you don't include the `resources` fields in your metadata list, then they will automatically be added. These fields identify
+the data files' paths and data `schema`.
 
 ### Installing Data Packages
 
@@ -92,7 +70,7 @@ gdp_data <- datapackage_install(path = 'gdp/')
 
 #### From the web
 
-Or you can install a package stored remotely using its URL. In this example
+You can install a package stored remotely using its URL. In this example
 we directly download the gdp data package from GitHub using the URL for its
 zip file:
 
@@ -101,13 +79,28 @@ URL <- 'https://github.com/datasets/gdp/archive/master.zip'
 gdp_data <- datapackage_install(path = URL)
 ```
 
-## Install R package
+## Get Data Package Metadata
+
+Use `datapackage_info` to read a data package's metadata into R:
+
+```r
+# Print information when working directory is a data package
+datapackage_info()
+```
+
+## Install dpmr R package
 
 To install the *dpmr* package use:
 
 ```r
 devtools::install_github('christophergandrud/dpmr')
 ```
+
+## To-do for *v0.2*
+
+- [ ] Load inline data from the *datapackage.json* file.
+
+- [ ] Load data from a GitHub repo using GitHub usernames and repos.
 
 ---
 
