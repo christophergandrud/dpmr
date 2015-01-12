@@ -1,0 +1,8 @@
+.Rproj.user
+.Rhistory
+.RData
+
+^Test
+
+My_Data_Package
+completer.hist
