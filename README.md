@@ -102,6 +102,8 @@ devtools::install_github('christophergandrud/dpmr')
 
 - [ ] `datapackage_update` for updating a data package's data and metadata.
 
+- [ ] Specify data variable descriptions in meta list.
+
 - [ ] Load inline data from the *datapackage.json* file.
 
 - [ ] Load data from a GitHub repo using GitHub usernames and repos.
