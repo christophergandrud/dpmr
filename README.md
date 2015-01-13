@@ -3,7 +3,7 @@
 Data Package Manager for R
 ====
 
-Version: 0.1.3 [![Build Status](https://travis-ci.org/christophergandrud/dpmr.svg?branch=master)](https://travis-ci.org/christophergandrud/dpmr)
+Version: 0.1.4 [![Build Status](https://travis-ci.org/christophergandrud/dpmr.svg?branch=master)](https://travis-ci.org/christophergandrud/dpmr)
 
 ## Description
 
@@ -48,17 +48,20 @@ included with the data package:
 
 ```r
 meta_list <- list(name = 'My_Data_Package',
-                title = 'A fake data package',
-                last_updated = Sys.Date(),
-                version = '0.1',
-                sources = data.frame(name = 'Fake',
-                                    web = 'No URL, its fake.'))
+                    title = 'A fake data package',
+                    last_updated = Sys.Date(),
+                    version = '0.1',
+                    license = data.frame(type = 'PDDL-1.0',
+                            url = 'http://opendatacommons.org/licenses/pddl/'),
+                    sources = data.frame(name = 'Fake',
+                            web = 'No URL, its fake.'))
 
 datapackage_init(df = Data, meta = meta_list)
 ```
 
-Note if you don't include the `resources` fields in your metadata list, then they will automatically be added. These fields identify
-the data files' paths and data `schema`.
+Note if you don't include the `resources` fields in your metadata list, then
+they will automatically be added. These fields identify the data files' paths
+and data `schema`.
 
 ### Installing Data Packages
 

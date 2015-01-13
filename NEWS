@@ -1,5 +1,17 @@
 # Changes to the package will be documented here
 
+## Version 0.1.4
+
+- `datapackage_init` validates that the user specified metadata lists included
+required minimum fields.
+
+- Error handling if `source_cleaner` paths incorrectly specified in
+`datapackage_init`.
+
+- Added user specified metadata example to `datapackage_init`.
+
+- Other documentation improvements.
+
 ## Version 0.1.3
 
 - Fixed a bug in `datapackage_info` where it would crash if a field was missing
@@ -7,7 +19,7 @@ from datapackage.json.
 
 ## Version 0.1.2
 
-- Added `source_cleaner_rename` to `datapackage_init` allowing the user to 
+- Added `source_cleaner_rename` to `datapackage_init` allowing the user to
 specify whether or not to rename `source_cleaner` files.
 
 ## Version 0.1.1

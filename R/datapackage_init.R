@@ -7,17 +7,20 @@
 #' if the \code{name} field is specified in \code{meta}.
 #' @param meta The list object with the data frame's meta data. The list
 #' item names must conform to the Open Knowledge Foundation's Data Package
-#' Protocol (see \url{http://dataprotocols.org/data-packages/}). \code{dpmr}
-#' uses \code{jsonlite} to convert the list into a JSON file. If
-#' \code{meta = NULL} then a barebones \code{datapackage.json} file will be
-#' created. If \code{resources} is not specified then this will be automatically
-#' generated.
-#' @param source_cleaner a character string or vector of file paths pointing to
-#' the source code file used to gather and clean the \code{df} data frame. Can
-#' be in R or any other language, e.g. Python. Following Data Package convention
-#' the scripts are renamed \code{process*.*}. You can also
-#' \code{source_cleaner} is not required, but HIGHLY RECOMMENDED.
-#' @param source_cleaner_rename logical. Whether or not to rename the 
+#' Protocol (see \url{http://dataprotocols.org/data-packages/}). Must include
+#' the \code{name}, \code{license}, and \code{version} fields.
+#' If \code{resources} is not specified then this will be automatically
+#' generated.\code{dpmr} uses \code{jsonlite} to convert the list into a JSON
+#' file. If \code{meta = NULL} then a barebones \code{datapackage.json} file
+#' will be created.
+#' @param source_cleaner a character string or vector of file paths relative to
+#' the current working directory pointing to the source code file used to gather
+#' and clean the \code{df} data frame. Can be in R or any other language, e.g.
+#' Python. Following Data Package convention the scripts are renamed
+#' \code{process*.*}, unless specified otherwise with
+#' \code{source_cleaner_rename}. \code{source_cleaner} is not required, but
+#' HIGHLY RECOMMENDED.
+#' @param source_cleaner_rename logical. Whether or not to rename the
 #' \code{source_cleaner} files.
 #' @param ... arguments to pass to methods.
 #'
@@ -28,8 +31,20 @@
 #' ID <- sort(rep('a', 20))
 #' Data <- data.frame(ID, A, B, C)
 #'
-#' # Initialise data package
+#' # Initialise data package with barebones, automatically generated metadata
 #' datapackage_init(df = Data, package_name = 'My_Data_Package')
+#'
+#' # Initialise with user specified metadata
+#' meta_list <- list(name = 'My_Data_Package',
+#'                  title = 'A fake data package',
+#'                  last_updated = Sys.Date(),
+#'                  version = '0.1',
+#'                  license = data.frame(type = 'PDDL-1.0',
+#'                           url = 'http://opendatacommons.org/licenses/pddl/'),
+#'                  sources = data.frame(name = 'Fake',
+#'                           web = 'No URL, its fake.'))
+#'
+#'  datapackage_init(df = Data, meta = meta_list)
 #' }
 #'
 #' @importFrom jsonlite toJSON
@@ -47,7 +62,15 @@ datapackage_init <- function(df,
     #------------------- Initialize data package directories ----------------- #
     if (missing(df)) stop('df must be specified.', call. = F)
 
-    if (!is.null(meta$name)){
+    if (!is.null(meta)){
+        # Ensure that required fields are present in metadata list
+        required_fields <- c('name', 'license.*', '.*version')
+        for (i in required_fields){
+            if (!any(grepl(i, names(meta)))) {
+                stop(paste('Missing required metadata field:', i))
+            }
+        }
+        # Extract data package name from metadata
         name <- meta$name
     }
     else if (is.null(meta$name)){
@@ -83,7 +106,7 @@ datapackage_init <- function(df,
         if (class(meta) != 'list') stop('meta must be a list', call. = F)
 
         if (is.null(meta$resources)) {
-            message('Adding resources to meta saved in datapackage.json.\n')
+            message('Adding resources to metadata saved in datapackage.json.\n')
             list(meta, resources_create(data_paths = data_base_paths,
                                         df = df)) %>%
                 toJSON(pretty = T) %>%
@@ -99,25 +122,28 @@ datapackage_init <- function(df,
 
     #---------------------- Copy source files into scripts ------------------- #
     if (!is.null(source_cleaner)) {
-        message('Moving in the source cleaner file(s):')
         for (i in 1:length(source_cleaner)){
-            # Check to see if exists in working directory/valid file path
-            #### To Do ####
-            # if (!(source_cleaner %in% list.files(path))) stop('source_cleaner files not found'.)
             if (isTRUE(source_cleaner_rename)){
                 new_s_name <- gsub(pattern = '(.*\\/)([^.]+)',
                                    replacement = paste0('process_', i),
-                                   x = source_cleaner[i])                
+                                   x = source_cleaner[i])
             }
             else {
                 new_s_name <- gsub(pattern = '(.*\\/)',
                                    replacement = '',
-                                   x = source_cleaner[i])                 
+                                   x = source_cleaner[i])
             }
 
-            file.copy(from = source_cleaner[i],
-                        to = paste0(name, '/scripts/', new_s_name))
-            message(paste('-', source_cleaner[i], '    >>    ', new_s_name))
+            info <- file.info(source_cleaner[i])
+            if (is.na(info[1])) {
+                warning(paste(source_cleaner[i], 'not found.'))
+            }
+            else {
+                message('Moving in the source cleaner file(s):')
+                file.copy(from = source_cleaner[i],
+                    to = paste0(name, '/scripts/', new_s_name))
+                message(paste('-', source_cleaner[i], '    >>    ', new_s_name))
+            }
         }
     }
 
