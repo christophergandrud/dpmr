@@ -20,8 +20,11 @@
 #' # Install the gdp data package from GitHub using its .zip URL
 #' URL <- 'https://github.com/datasets/gdp/archive/master.zip'
 #' gdp_data <- datapackage_install(path = URL)
-#' }
 #'
+#' # Install co2 data
+#' test <- "https://github.com/datasets/co2-ppm/archive/master.zip" %>%
+#'          datapackage_install()
+#' }
 #' @importFrom digest digest
 #' @importFrom jsonlite fromJSON
 #' @importFrom magrittr %>%

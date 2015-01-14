@@ -59,7 +59,7 @@ schema_df <- function(df){
 
 resources_create <- function(data_paths, df){
     resources_out <- list(resources = data.frame(path = data_paths),
-        schema = schema_df(df))
+                            schema = schema_df(df))
     return(resources_out)
 }
 
