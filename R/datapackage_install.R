@@ -98,7 +98,7 @@ datapackage_install <- function(path,
         return(meta)
     }
     else {
-        data_files <- meta$resources[[2]]
+        data_files <- meta$resources[['path']]
         # Load data file into workspace
         if (missing(load_file)){
             # Load first file into R

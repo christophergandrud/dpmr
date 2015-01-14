@@ -116,7 +116,7 @@ meta_message_data <- function(resources){
         '\nNo instruction for finding resources given.\n', call. = F))
     }
     else if (!is.null(resources)){
-        data_files <- resources[[2]] %>% unlist()
+        data_files <- resources[['path']] %>% unlist()
         message(paste('The data package contains the following data file(s):\n'))
         for (i in data_files){
             message(paste0(i))
