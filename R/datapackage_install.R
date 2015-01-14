@@ -49,7 +49,9 @@ datapackage_install <- function(path,
             if (zipped_path %in% list.files()) {
                 unlink(c(temp_path, temp_path_2), recursive = T)
                 stop(paste('Datapackage', zipped_path, 'already installed.\n',
-                    'Either remove and reinstall or load the data into R using a normal R way.'),
+                    'Either remove and reinstall \n',
+                    'or\n',
+                    'if you just want to load data from the package, load the data using a normal R way.'),
                     call. = F)
             }
 
@@ -96,7 +98,7 @@ datapackage_install <- function(path,
                 '\nNo instruction for finding resources given.\n', call. = F))
         }
         else if (!is.null(resources)){
-            data_files <- resources[[1]] %>% unlist()
+            data_files <- resources[[2]] %>% unlist()
             message(paste('The data package contains the following data file(s):\n'))
             for (i in data_files){
                 message(paste0(i))
