@@ -5,6 +5,8 @@
 - Improved `datapackage_install` handling when data package contains multiple
 data files.
 
+- Improved message from `datapackage_info` for included data files.
+
 ## Version 0.1.4
 
 - `datapackage_init` validates that the user specified metadata lists included

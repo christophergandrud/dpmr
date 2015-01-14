@@ -5,8 +5,8 @@
 #' Can also accept a datapackage.json file parsed in R as a list.
 #' @param as_list logical indicating whether or not to return the
 #' datapackage.json file as a list.
-#' 
-#' @examples 
+#'
+#' @examples
 #' \dontrun{
 #' # Print information when working directory is a data package
 #' datapackage_info()
@@ -47,6 +47,10 @@ datapackage_info <- function(path,
     meta_message('maintainer', 'Maintainers:', meta_in = meta)
     meta_message('contributors', 'Contributors:', meta_in = meta)
     meta_message('sources', 'Sources:', meta_in = meta)
+
+    message('\n')
+
+    meta$resources %>% meta_message_data()
 
     message('\n----')
 

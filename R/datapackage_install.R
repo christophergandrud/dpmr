@@ -46,12 +46,19 @@ datapackage_install <- function(path,
             unzip(temp_path, exdir = temp_path_2)
 
             zipped_path <- list.files(temp_path_2)
-            if (zipped_path %in% list.files()) {
+            meta_zipped <- paste0(temp_path_2, '/', zipped_path,
+                                '/datapackage.json') %>%
+                        fromJSON()
+            pkg_zipped_name <- meta_zipped$name
+
+            if (file.exists(pkg_zipped_name)){
                 unlink(c(temp_path, temp_path_2), recursive = T)
-                stop(paste('Datapackage', zipped_path, 'already installed.\n',
-                    'Either remove and reinstall \n',
-                    'or\n',
-                    'if you just want to load data from the package, load the data using a normal R way.'),
+                stop(paste('Datapackage already installed.\n\n',
+                    'Either remove and reinstall \n\n',
+                    'OR\n\n',
+                    'If you just want to load data from the package, load the data using a normal R way.\n\n',
+                    'To find a list of data file paths for this package change the working directory to the data package\n',
+                    'and use datapackage_info().'),
                     call. = F)
             }
 
@@ -91,20 +98,7 @@ datapackage_install <- function(path,
         return(meta)
     }
     else {
-        resources <- meta$resources
-
-        if (is.null(resources)) {
-            stop(paste0('\nData package is not properly documented.',
-                '\nNo instruction for finding resources given.\n', call. = F))
-        }
-        else if (!is.null(resources)){
-            data_files <- resources[[2]] %>% unlist()
-            message(paste('The data package contains the following data file(s):\n'))
-            for (i in data_files){
-                message(paste0(i))
-            }
-        }
-
+        data_files <- meta$resources[[2]]
         # Load data file into workspace
         if (missing(load_file)){
             # Load first file into R

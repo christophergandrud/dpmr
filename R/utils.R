@@ -103,3 +103,23 @@ meta_message <- function(field, pre_field, meta_in = meta){
     }
     else return('')
 }
+
+#' Return list of included data files to console
+#' @importFrom magrittr %>%
+#'
+#' @keywords internals
+#' @noRd
+
+meta_message_data <- function(resources){
+    if (is.null(resources)) {
+        stop(paste0('\nData package is not properly documented.',
+        '\nNo instruction for finding resources given.\n', call. = F))
+    }
+    else if (!is.null(resources)){
+        data_files <- resources[[2]] %>% unlist()
+        message(paste('The data package contains the following data file(s):\n'))
+        for (i in data_files){
+            message(paste0(i))
+        }
+    }
+}
