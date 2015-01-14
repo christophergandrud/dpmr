@@ -20,9 +20,10 @@ item names must conform to the Open Knowledge Foundation's Data Package
 Protocol (see \url{http://dataprotocols.org/data-packages/}). Must include
 the \code{name}, \code{license}, and \code{version} fields.
 If \code{resources} is not specified then this will be automatically
-generated.\code{dpmr} uses \code{jsonlite} to convert the list into a JSON
-file. If \code{meta = NULL} then a barebones \code{datapackage.json} file
-will be created.}
+generated.\code{dpmr} uses \code{jsonlite} to convert the list into a
+JSON file. See the \code{\link{toJSON}} documentation for details.
+If \code{meta = NULL} then a barebones \code{datapackage.json} file will be
+created.}
 
 \item{source_cleaner}{a character string or vector of file paths relative to
 the current working directory pointing to the source code file used to gather

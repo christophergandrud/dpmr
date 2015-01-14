@@ -7,6 +7,8 @@ data files.
 
 - Improved message from `datapackage_info` for included data files.
 
+- Minor documentation improvements.
+
 ## Version 0.1.4
 
 - `datapackage_init` validates that the user specified metadata lists included
