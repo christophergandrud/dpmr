@@ -15,7 +15,7 @@ then it currently must be \code{.zip}-ped.}
 \item{load_file}{character string specifying the path of the data file to
 load into R. The correct file paths will be printed when the function runs.
 By default the first file in the datapackage.json path list is
-loaded. Can only be a CSV formatted file currently.
+loaded.
 Note: only one file can be loaded at a time.}
 
 \item{full_meta}{logical. Wheter or not to return the full datapackage.json
@@ -34,7 +34,8 @@ URL <- 'https://github.com/datasets/gdp/archive/master.zip'
 gdp_data <- datapackage_install(path = URL)
 
 # Install co2 data
-test <- "https://github.com/datasets/co2-ppm/archive/master.zip" \%>\%
+library(dplyr)
+co2_data <- "https://github.com/datasets/co2-ppm/archive/master.zip" \%>\%
          datapackage_install()
 }
 }

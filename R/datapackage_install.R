@@ -7,7 +7,7 @@
 #' @param load_file character string specifying the path of the data file to
 #' load into R. The correct file paths will be printed when the function runs.
 #' By default the first file in the datapackage.json path list is
-#' loaded. Can only be a CSV formatted file currently.
+#' loaded.
 #' Note: only one file can be loaded at a time.
 #' @param full_meta logical. Wheter or not to return the full datapackage.json
 #' metadata. Note: when \code{TRUE} only the meta data is returned not the data.
@@ -22,9 +22,11 @@
 #' gdp_data <- datapackage_install(path = URL)
 #'
 #' # Install co2 data
-#' test <- "https://github.com/datasets/co2-ppm/archive/master.zip" %>%
+#' library(dplyr)
+#' co2_data <- "https://github.com/datasets/co2-ppm/archive/master.zip" %>%
 #'          datapackage_install()
 #' }
+#' @importFrom data.table fread
 #' @importFrom digest digest
 #' @importFrom jsonlite fromJSON
 #' @importFrom magrittr %>%
@@ -106,14 +108,14 @@ datapackage_install <- function(path,
         if (missing(load_file)){
             # Load first file into R
             message(paste('\nLoading into R:', data_files[1]))
-            paste0(path, '/', data_files[1]) %>% read.csv(stringsAsFactors = F)
+            paste0(path, '/', data_files[1]) %>% fread()
         }
         else if (!missing(load_file)) {
             if (!(load_file %in% data_files)) stop(paste(load_file,
                                 "is not in the data package's resource list."),
                                 call. = FALSE)
             message(paste('\nLoading into R:', load_file))
-            paste0(path, '/', load_file) %>% read.csv(stringsAsFactors = FALSE)
+            paste0(path, '/', load_file) %>% fread()
         }
     }
 }

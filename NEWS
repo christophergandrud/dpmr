@@ -1,5 +1,12 @@
 # Changes to the package will be documented here
 
+## Verion 0.1.6
+
+- Use `fread` from the data.table package for loading data files into R.
+Faster and more flexible than previous `read.csv` implementation.
+
+- Minor documentation improvements for `datapackage_info`.
+
 ## Version 0.1.5
 
 - Improved `datapackage_install` handling when data package contains multiple
