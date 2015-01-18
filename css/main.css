@@ -6,12 +6,19 @@ body {
     padding-right: 10%;
     max-width: 700px;
     line-height: 1.5em;
-    background-color: #F9FCFF;
+}
+
+h1 {
+    font-size: calc(100% + 2.5vw);
+    color: blue;
+    text-align: center;
 }
 
 h2 {
-    border-bottom: 1px solid;
-    margin-top: 10%;
+    border-bottom: 2px solid blue;
+    color: blue;
+    margin-bottom: 5%;
+    margin-top: 5%;
 }
 
 h3,h4,h5,h6,p,ul,pre {
@@ -19,15 +26,20 @@ h3,h4,h5,h6,p,ul,pre {
 }
 
 a {
-    text-decoration: none;
+    text-decoration: underline;
+    color: black;
+}
+
+a:hover {
+    color: blue;
 }
 
 pre {
-    background: white;
-    border-left: solid 2px #ccc;
-    padding-left: 5%;
-    width: 99%;
+    background: #f0f0f0;
+    border-left: solid 3px #636363;
     overflow-x: auto;
+    padding: 5% 5%;
+    width: 99%;
 }
 
 .dpmr-logo {
@@ -134,5 +146,14 @@ pre {
 
         5em 12em,
         6em 12em,
-        7em 12em;
+        7em 12em,
+
+        20em 12em,
+
+        21em 13em,
+        22em 13em,
+        23em 13em,
+        24em 13em,
+        26em 13em,
+        25em 14em;
 }

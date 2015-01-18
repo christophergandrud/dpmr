@@ -2,19 +2,39 @@
 output:
     html_document:
         theme: null
-        highlight: kate
+        highlight: haddock
         self_contained: false
         css: css/main.css
 ---
+
+<LINK href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
 <div class="dpmr-logo"></div>
 
 <br>
 
-Data Package Manager for R
-====
+# Data Package Manager for R
 
-Version: 0.1.3 [![Build Status](https://travis-ci.org/christophergandrud/dpmr.svg?branch=master)](https://travis-ci.org/christophergandrud/dpmr)
+<p class="pull-right">
+<strong>
+Fork me on <a href="https://github.com/christophergandrud/networkD3"><i class="fa fa-github fa-lg"></i></a>
+</strong>
+</p>
+
+**Under Development: v`r packageVersion('networkD3')`**
+
+
+[![Build Status](https://travis-ci.org/christophergandrud/dpmr.svg?branch=master)](https://travis-ci.org/christophergandrud/dpmr)
+
+
+<p class="pull-right">
+<strong>
+Issues/suggestions <a href="https://github.com/christophergandrud/networkD3/issues"><i class="fa fa-exclamation-circle"></i></a>
+</strong>
+</p>
+
+
+**Maintainer:** [Christopher Gandrud](http://christophergandrud.blogspot.com/)
 
 ## Description
 
@@ -42,7 +62,6 @@ To initiate a barebones data package in the current working directory called
 `My_Data_Package` use:
 
 ```r
-# Create fake data
 A <- B <- C <- sample(1:20, size = 20, replace = TRUE)
 ID <- sort(rep('a', 20))
 Data <- data.frame(ID, A, B, C)
@@ -62,14 +81,17 @@ meta_list <- list(name = 'My_Data_Package',
                 title = 'A fake data package',
                 last_updated = Sys.Date(),
                 version = '0.1',
+                license = data.frame(type = 'PDDL-1.0',
+                        url = 'http://opendatacommons.org/licenses/pddl/'),
                 sources = data.frame(name = 'Fake',
-                                    web = 'No URL, its fake.'))
+                        web = 'No URL, its fake.'))
 
 datapackage_init(df = Data, meta = meta_list)
 ```
 
-Note if you don't include the `resources` fields in your metadata list, then they will automatically be added. These fields identify
-the data files' paths and data `schema`.
+Note if you don't include the `resources` fields in your metadata list, then
+they will automatically be added. These fields identify the data files' paths
+and data `schema`.
 
 ### Installing Data Packages
 
@@ -111,13 +133,15 @@ devtools::install_github('christophergandrud/dpmr')
 
 ## To-do for *v0.2*
 
-- [ ] `datapackage_update` for updating a data package's data and metadata.
+**dpmr** is underdevelopment. Key features we aim to implement in version 0.2.
 
-- [ ] Specify data variable descriptions in meta list.
+- `datapackage_update` for updating a data package's data and metadata.
 
-- [ ] Load inline data from the *datapackage.json* file.
+- Specify data variable descriptions in meta list.
 
-- [ ] Load data from a GitHub repo using GitHub usernames and repos.
+- Load inline data from the *datapackage.json* file.
+
+- Load data from a GitHub repo using GitHub usernames and repos.
 
 ---
 

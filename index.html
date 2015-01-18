@@ -19,19 +19,15 @@
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
   margin: 0; padding: 0; vertical-align: baseline; border: none; }
 table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; background-color: #dddddd; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
 td.sourceCode { padding-left: 5px; }
-code > span.kw { font-weight: bold; }
-code > span.dt { color: #800000; }
-code > span.dv { color: #0000ff; }
-code > span.bn { color: #0000ff; }
-code > span.fl { color: #800080; }
-code > span.ch { color: #ff00ff; }
-code > span.st { color: #dd0000; }
-code > span.co { color: #808080; font-style: italic; }
-code > span.al { color: #00ff00; font-weight: bold; }
-code > span.fu { color: #000080; }
-code > span.er { color: #ff0000; font-weight: bold; }
+code > span.kw { color: #0000ff; }
+code > span.ch { color: #008080; }
+code > span.st { color: #008080; }
+code > span.co { color: #008000; }
+code > span.ot { color: #ff4000; }
+code > span.al { color: #ff0000; }
+code > span.er { font-weight: bold; }
 </style>
 <style type="text/css">
   pre:not([class]) {
@@ -50,13 +46,22 @@ code > span.er { color: #ff0000; font-weight: bold; }
 
 
 
+<p><LINK href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"></p>
 <div class="dpmr-logo">
 
 </div>
 <p><br></p>
 <div id="data-package-manager-for-r" class="section level1">
 <h1>Data Package Manager for R</h1>
-<p>Version: 0.1.3 <a href="https://travis-ci.org/christophergandrud/dpmr"><img src="https://travis-ci.org/christophergandrud/dpmr.svg?branch=master" alt="Build Status" /></a></p>
+<p class="pull-right">
+<strong> Fork me on <a href="https://github.com/christophergandrud/networkD3"><i class="fa fa-github fa-lg"></i></a> </strong>
+</p>
+<p><strong>Under Development: v0.1.2</strong></p>
+<p><a href="https://travis-ci.org/christophergandrud/dpmr"><img src="https://travis-ci.org/christophergandrud/dpmr.svg?branch=master" alt="Build Status" /></a></p>
+<p class="pull-right">
+<strong> Issues/suggestions <a href="https://github.com/christophergandrud/networkD3/issues"><i class="fa fa-exclamation-circle"></i></a> </strong>
+</p>
+<p><strong>Maintainer:</strong> <a href="http://christophergandrud.blogspot.com/">Christopher Gandrud</a></p>
 <div id="description" class="section level2">
 <h2>Description</h2>
 <p>The R package for creating and installing data packages that follow the <a href="https://okfn.org/">Open Knowledge Foundation</a>’s <a href="http://dataprotocols.org/data-packages/">Data Package Protocol</a>.</p>
@@ -72,8 +77,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <div id="create-data-packages" class="section level3">
 <h3>Create Data Packages</h3>
 <p>To initiate a barebones data package in the current working directory called <code>My_Data_Package</code> use:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create fake data</span>
-A &lt;-<span class="st"> </span>B &lt;-<span class="st"> </span>C &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span>:<span class="dv">20</span>, <span class="dt">size =</span> <span class="dv">20</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)
+<pre class="sourceCode r"><code class="sourceCode r">A &lt;-<span class="st"> </span>B &lt;-<span class="st"> </span>C &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span>:<span class="dv">20</span>, <span class="dt">size =</span> <span class="dv">20</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)
 ID &lt;-<span class="st"> </span><span class="kw">sort</span>(<span class="kw">rep</span>(<span class="st">&#39;a&#39;</span>, <span class="dv">20</span>))
 Data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(ID, A, B, C)
 
@@ -84,8 +88,10 @@ Data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(ID, A, B, 
                 <span class="dt">title =</span> <span class="st">&#39;A fake data package&#39;</span>,
                 <span class="dt">last_updated =</span> <span class="kw">Sys.Date</span>(),
                 <span class="dt">version =</span> <span class="st">&#39;0.1&#39;</span>,
+                <span class="dt">license =</span> <span class="kw">data.frame</span>(<span class="dt">type =</span> <span class="st">&#39;PDDL-1.0&#39;</span>,
+                        <span class="dt">url =</span> <span class="st">&#39;http://opendatacommons.org/licenses/pddl/&#39;</span>),
                 <span class="dt">sources =</span> <span class="kw">data.frame</span>(<span class="dt">name =</span> <span class="st">&#39;Fake&#39;</span>,
-                                    <span class="dt">web =</span> <span class="st">&#39;No URL, its fake.&#39;</span>))
+                        <span class="dt">web =</span> <span class="st">&#39;No URL, its fake.&#39;</span>))
 
 <span class="kw">datapackage_init</span>(<span class="dt">df =</span> Data, <span class="dt">meta =</span> meta_list)</code></pre>
 <p>Note if you don’t include the <code>resources</code> fields in your metadata list, then they will automatically be added. These fields identify the data files’ paths and data <code>schema</code>.</p>
@@ -118,11 +124,12 @@ gdp_data &lt;-<span class="st"> </span><span class="kw">datapackage_install</spa
 </div>
 <div id="to-do-for-v0.2" class="section level2">
 <h2>To-do for <em>v0.2</em></h2>
+<p><strong>dpmr</strong> is underdevelopment. Key features we aim to implement in version 0.2.</p>
 <ul>
-<li><p>[ ] <code>datapackage_update</code> for updating a data package’s data and metadata.</p></li>
-<li><p>[ ] Specify data variable descriptions in meta list.</p></li>
-<li><p>[ ] Load inline data from the <em>datapackage.json</em> file.</p></li>
-<li><p>[ ] Load data from a GitHub repo using GitHub usernames and repos.</p></li>
+<li><p><code>datapackage_update</code> for updating a data package’s data and metadata.</p></li>
+<li><p>Specify data variable descriptions in meta list.</p></li>
+<li><p>Load inline data from the <em>datapackage.json</em> file.</p></li>
+<li><p>Load data from a GitHub repo using GitHub usernames and repos.</p></li>
 </ul>
 <hr />
 <p><a href="http://nadrosia.tumblr.com/post/53520500877/made-in-berlin-badge-update"><img src="http://media.tumblr.com/023c285c14ef01953d3b67ffe789004d/tumblr_inline_mor1uu2OOZ1qz4rgp.png" height = "100" align="right" /></a></p>
