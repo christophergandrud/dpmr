@@ -3,10 +3,11 @@ Title: Data Package Manager for R
 Description: An R package for creating and installing data packages that follow
     the Open Knowledge Foundation's Data Package Protocol.
 Version: 0.1.6
-Date: 2015-01-15
-Authors@R: as.person(c(
-    "Christopher Gandrud <christopher.gandrud@gmail.com> [aut, cre, cph]"
-    ))
+Date: 2015-01-23
+Authors@R: c(
+    person("Christopher", "Gandrud", email = "christopher.gandrud@gmail.com",
+    role = c("aut", "cre"))
+    )
 URL: http://christophergandrud.github.io/dpmr/
 BugReports: https://github.com/christophergandrud/dpmr/issues
 License: GPL-3

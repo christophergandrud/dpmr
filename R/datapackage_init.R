@@ -62,7 +62,8 @@ datapackage_init <- function(df,
 {
     #------------------- Initialize data package directories ----------------- #
     if (missing(df)) stop('df must be specified.', call. = F)
-
+    class(df) <- 'data.frame'
+    
     if (!is.null(meta)){
         # Ensure that required fields are present in metadata list
         required_fields <- c('name', 'license.*', '.*version')
