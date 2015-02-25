@@ -39,7 +39,7 @@ datapackage_install <- function(path,
     . <- NULL
     # Determine how to load the data package and place it in a temp directory
     # Is the file from a url?
-    if (isTRUE(grepl('^http', path))){
+    if (grepl('^http', path)){
         URL <- path
         temp_path <- digest(URL) %>% paste0('temp_', .)
         download(path = temp_path, url = URL)
@@ -75,7 +75,7 @@ datapackage_install <- function(path,
 
             path <- zipped_path
         }
-        else if (!isTRUE(grepl('^http', path))){
+        else if (!grepl('^http', path)){
             path <- temp_path
         }
     }
