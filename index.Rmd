@@ -13,15 +13,15 @@ output:
 
 <br>
 
-# Data Package Manager for R
+# (Tabular) Data Package Manager for R
 
 <p class="pull-right">
 <strong>
-Fork me on <a href="https://github.com/christophergandrud/networkD3"><i class="fa fa-github fa-lg"></i></a>
+Fork me on <a href="https://github.com/christophergandrud/dpmr"><i class="fa fa-github fa-lg"></i></a>
 </strong>
 </p>
 
-**Under Development: v`r packageVersion('networkD3')`**
+**Under Development: v`r packageVersion('dpmr')`**
 
 
 [![Build Status](https://travis-ci.org/christophergandrud/dpmr.svg?branch=master)](https://travis-ci.org/christophergandrud/dpmr)
@@ -29,7 +29,7 @@ Fork me on <a href="https://github.com/christophergandrud/networkD3"><i class="f
 
 <p class="pull-right">
 <strong>
-Issues/suggestions <a href="https://github.com/christophergandrud/networkD3/issues"><i class="fa fa-exclamation-circle"></i></a>
+Issues/suggestions <a href="https://github.com/christophergandrud/dpmr/issues"><i class="fa fa-exclamation-circle"></i></a>
 </strong>
 </p>
 
@@ -39,8 +39,8 @@ Issues/suggestions <a href="https://github.com/christophergandrud/networkD3/issu
 ## Description
 
 The R package for creating and installing data packages that follow the
-[Open Knowledge Foundation](https://okfn.org/)'s
-[Data Package Protocol](http://dataprotocols.org/data-packages/).
+[Open Knowledge's](https://okfn.org/)'s
+[Tabular Data Package spec](http://data.okfn.org/doc/tabular-data-package/).
 
 **dpmr** has three core functions:
 

@@ -12,6 +12,7 @@ h1 {
     font-size: calc(100% + 2.5vw);
     color: blue;
     text-align: center;
+    line-height: 150%;
 }
 
 h2 {
