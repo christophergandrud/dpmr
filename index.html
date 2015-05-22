@@ -16,6 +16,7 @@
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
+div.sourceCode { overflow-x: auto; }
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
   margin: 0; padding: 0; vertical-align: baseline; border: none; }
 table.sourceCode { width: 100%; line-height: 100%; }
@@ -56,7 +57,7 @@ code > span.er { font-weight: bold; }
 <p class="pull-right">
 <strong> Fork me on <a href="https://github.com/christophergandrud/dpmr"><i class="fa fa-github fa-lg"></i></a> </strong>
 </p>
-<p><strong>Under Development: v0.1.6</strong></p>
+<p><strong>Under Development: v0.1.7</strong></p>
 <p><a href="https://travis-ci.org/christophergandrud/dpmr"><img src="https://travis-ci.org/christophergandrud/dpmr.svg?branch=master" alt="Build Status" /></a></p>
 <p class="pull-right">
 <strong> Issues/suggestions <a href="https://github.com/christophergandrud/dpmr/issues"><i class="fa fa-exclamation-circle"></i></a> </strong>
@@ -77,14 +78,14 @@ code > span.er { font-weight: bold; }
 <div id="create-data-packages" class="section level3">
 <h3>Create Data Packages</h3>
 <p>To initiate a barebones data package in the current working directory called <code>My_Data_Package</code> use:</p>
-<pre class="sourceCode r"><code class="sourceCode r">A &lt;-<span class="st"> </span>B &lt;-<span class="st"> </span>C &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span>:<span class="dv">20</span>, <span class="dt">size =</span> <span class="dv">20</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">A &lt;-<span class="st"> </span>B &lt;-<span class="st"> </span>C &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span>:<span class="dv">20</span>, <span class="dt">size =</span> <span class="dv">20</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)
 ID &lt;-<span class="st"> </span><span class="kw">sort</span>(<span class="kw">rep</span>(<span class="st">&#39;a&#39;</span>, <span class="dv">20</span>))
 Data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(ID, A, B, C)
 
-<span class="kw">datapackage_init</span>(<span class="dt">df =</span> Data, <span class="dt">package_name =</span> <span class="st">&#39;My_Data_Package&#39;</span>)</code></pre>
+<span class="kw">datapackage_init</span>(<span class="dt">df =</span> Data, <span class="dt">package_name =</span> <span class="st">&#39;My_Data_Package&#39;</span>)</code></pre></div>
 <p>This will create a data package with barebones metadata in a <em><a href="http://dataprotocols.org/data-packages/">datapackage.json</a></em> file. You can then edit this by hand.</p>
 <p>Alternatively, you can also create a list with the metadata in R and have this included with the data package:</p>
-<pre class="sourceCode r"><code class="sourceCode r">meta_list &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">name =</span> <span class="st">&#39;My_Data_Package&#39;</span>,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">meta_list &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">name =</span> <span class="st">&#39;My_Data_Package&#39;</span>,
                 <span class="dt">title =</span> <span class="st">&#39;A fake data package&#39;</span>,
                 <span class="dt">last_updated =</span> <span class="kw">Sys.Date</span>(),
                 <span class="dt">version =</span> <span class="st">&#39;0.1&#39;</span>,
@@ -93,7 +94,7 @@ Data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(ID, A, B, 
                 <span class="dt">sources =</span> <span class="kw">data.frame</span>(<span class="dt">name =</span> <span class="st">&#39;Fake&#39;</span>,
                         <span class="dt">web =</span> <span class="st">&#39;No URL, its fake.&#39;</span>))
 
-<span class="kw">datapackage_init</span>(<span class="dt">df =</span> Data, <span class="dt">meta =</span> meta_list)</code></pre>
+<span class="kw">datapackage_init</span>(<span class="dt">df =</span> Data, <span class="dt">meta =</span> meta_list)</code></pre></div>
 <p>Note if you don’t include the <code>resources</code> fields in your metadata list, then they will automatically be added. These fields identify the data files’ paths and data <code>schema</code>.</p>
 </div>
 <div id="installing-data-packages" class="section level3">
@@ -101,26 +102,26 @@ Data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(ID, A, B, 
 <div id="locally" class="section level4">
 <h4>Locally</h4>
 <p>To load a data package called <a href="https://github.com/datasets/gdp">gdp</a> stored in the current working directory use:</p>
-<pre class="sourceCode r"><code class="sourceCode r">gdp_data &lt;-<span class="st"> </span><span class="kw">datapackage_install</span>(<span class="dt">path =</span> <span class="st">&#39;gdp/&#39;</span>)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gdp_data &lt;-<span class="st"> </span><span class="kw">datapackage_install</span>(<span class="dt">path =</span> <span class="st">&#39;gdp/&#39;</span>)</code></pre></div>
 </div>
 <div id="from-the-web" class="section level4">
 <h4>From the web</h4>
 <p>You can install a package stored remotely using its URL. In this example we directly download the gdp data package from GitHub using the URL for its zip file:</p>
-<pre class="sourceCode r"><code class="sourceCode r">URL &lt;-<span class="st"> &#39;https://github.com/datasets/gdp/archive/master.zip&#39;</span>
-gdp_data &lt;-<span class="st"> </span><span class="kw">datapackage_install</span>(<span class="dt">path =</span> URL)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">URL &lt;-<span class="st"> &#39;https://github.com/datasets/gdp/archive/master.zip&#39;</span>
+gdp_data &lt;-<span class="st"> </span><span class="kw">datapackage_install</span>(<span class="dt">path =</span> URL)</code></pre></div>
 </div>
 </div>
 </div>
 <div id="get-data-package-metadata" class="section level2">
 <h2>Get Data Package Metadata</h2>
 <p>Use <code>datapackage_info</code> to read a data package’s metadata into R:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Print information when working directory is a data package</span>
-<span class="kw">datapackage_info</span>()</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Print information when working directory is a data package</span>
+<span class="kw">datapackage_info</span>()</code></pre></div>
 </div>
 <div id="install-dpmr-r-package" class="section level2">
 <h2>Install dpmr R package</h2>
 <p>To install the <em>dpmr</em> package use:</p>
-<pre class="sourceCode r"><code class="sourceCode r">devtools::<span class="kw">install_github</span>(<span class="st">&#39;christophergandrud/dpmr&#39;</span>)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools::<span class="kw">install_github</span>(<span class="st">&#39;christophergandrud/dpmr&#39;</span>)</code></pre></div>
 </div>
 <div id="to-do-for-v0.2" class="section level2">
 <h2>To-do for <em>v0.2</em></h2>
