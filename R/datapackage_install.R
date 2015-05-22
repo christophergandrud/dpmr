@@ -11,7 +11,7 @@
 #' Note: only one file can be loaded at a time.
 #' @param full_meta logical. Wheter or not to return the full datapackage.json
 #' metadata. Note: when \code{TRUE} only the meta data is returned not the data.
-#'
+#' @param ... arguments to pass to \code{\link{import}}.
 #' @examples
 #' \dontrun{
 #' # Load a data package called gdp stored in the current working directory:
@@ -26,7 +26,7 @@
 #' co2_data <- "https://github.com/datasets/co2-ppm/archive/master.zip" %>%
 #'          datapackage_install()
 #' }
-#' @importFrom data.table fread
+#' @importFrom rio import
 #' @importFrom digest digest
 #' @importFrom jsonlite fromJSON
 #' @importFrom magrittr %>%
@@ -34,7 +34,8 @@
 
 datapackage_install <- function(path,
                                 load_file,
-                                full_meta = FALSE)
+                                full_meta = FALSE,
+                                ...)
 {
     . <- NULL
     # Determine how to load the data package and place it in a temp directory
@@ -108,14 +109,14 @@ datapackage_install <- function(path,
         if (missing(load_file)){
             # Load first file into R
             message(paste('\nLoading into R:', data_files[1]))
-            paste0(path, '/', data_files[1]) %>% fread()
+            import(paste0(path, '/', data_files[1]), ...)
         }
         else if (!missing(load_file)) {
             if (!(load_file %in% data_files)) stop(paste(load_file,
                                 "is not in the data package's resource list."),
                                 call. = FALSE)
             message(paste('\nLoading into R:', load_file))
-            paste0(path, '/', load_file) %>% fread()
+            import(paste0(path, '/', load_file), ...)
         }
     }
 }

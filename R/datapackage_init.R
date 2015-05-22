@@ -23,7 +23,7 @@
 #' HIGHLY RECOMMENDED.
 #' @param source_cleaner_rename logical. Whether or not to rename the
 #' \code{source_cleaner} files.
-#' @param ... arguments to pass to methods.
+#' @param ... arguments to pass to \code{\link{export}}.
 #'
 #' @examples
 #' \dontrun{
@@ -48,6 +48,7 @@
 #'  datapackage_init(df = Data, meta = meta_list)
 #' }
 #'
+#' @importFrom rio export
 #' @importFrom jsonlite toJSON
 #' @importFrom magrittr %>%
 #'
@@ -153,5 +154,5 @@ datapackage_init <- function(df,
 
     # Write the data file into data/ as a CSV
     message(paste('Saving data frame as:', data_base_paths))
-    write.csv(df, file = paste0(name, '/', data_base_paths), ...)
+    export(df, file = paste0(name, '/', data_base_paths), ...)
 }

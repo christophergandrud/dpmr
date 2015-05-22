@@ -1,5 +1,9 @@
 # Changes to the package will be documented here
 
+## Version 0.1.7
+
+- Now uses the rio package for data import and export.
+
 ## Verion 0.1.6
 
 - Use `fread` from the data.table package for loading data files into R.
