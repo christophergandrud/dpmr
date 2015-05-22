@@ -1,4 +1,4 @@
-[<img src="img/logo.png" align="right" height="80"/ alt="dmpr logo">]()
+[<img src="img/logo.png" align="right" height="80"/ alt="dmpr logo">](https://raw.githubusercontent.com/christophergandrud/dpmr/master/img/logo.png)
 
 Data Package Manager for R
 ====
@@ -93,14 +93,6 @@ Use `datapackage_info` to read a data package's metadata into R:
 datapackage_info()
 ```
 
-## Install dpmr R package
-
-To install the *dpmr* package use:
-
-```r
-devtools::install_github('christophergandrud/dpmr')
-```
-
 ## To-do for *v0.2*
 
 - [ ] `datapackage_update` for updating a data package's data and metadata.
@@ -112,8 +104,6 @@ devtools::install_github('christophergandrud/dpmr')
 - [ ] Load data from a GitHub repo using GitHub usernames and repos.
 
 ---
-
-[<img src="http://media.tumblr.com/023c285c14ef01953d3b67ffe789004d/tumblr_inline_mor1uu2OOZ1qz4rgp.png" height = "100" align="right" />](http://nadrosia.tumblr.com/post/53520500877/made-in-berlin-badge-update)
 
 Licensed under
 [GPL-3](LICENSE.md)
