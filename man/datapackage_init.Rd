@@ -20,7 +20,7 @@ item names must conform to the Open Knowledge Foundation's Data Package
 Protocol (see \url{http://dataprotocols.org/data-packages/}). Must include
 the \code{name}, \code{license}, and \code{version} fields.
 If \code{resources} is not specified then this will be automatically
-generated.\code{dpmr} uses \code{jsonlite} to convert the list into a
+generated. \code{dpmr} uses \code{jsonlite} to convert the list into a
 JSON file. See the \code{\link{toJSON}} documentation for details.
 If \code{meta = NULL} then a barebones \code{datapackage.json} file will be
 created.}
@@ -50,10 +50,10 @@ ID <- sort(rep('a', 20))
 Data <- data.frame(ID, A, B, C)
 
 # Initialise data package with barebones, automatically generated metadata
-datapackage_init(df = Data, package_name = 'My_Data_Package')
+datapackage_init(df = Data, package_name = 'my-data-package')
 
 # Initialise with user specified metadata
-meta_list <- list(name = 'My_Data_Package',
+meta_list <- list(name = 'my-data-package',
                  title = 'A fake data package',
                  last_updated = Sys.Date(),
                  version = '0.1',

@@ -15,7 +15,7 @@ meta_template <- function(df, name, data_paths){
         description = '',
         maintainer = list(),
         contributors = list(),
-        version = "1",
+        version = '1',
         last_updated = as.Date(Sys.time()),
         homepage = '',
         keywords = list(),

@@ -1,5 +1,11 @@
 # Changes to the package will be documented here
 
+
+## Version 0.1.8
+
+- Improved compliance with the OKFN data package validator.
+Thank you to Yann-Aël Le Borgne.
+
 ## Version 0.1.7
 
 - Now uses the rio package for data import and export.
