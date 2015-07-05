@@ -10,7 +10,7 @@
 #' Protocol (see \url{http://dataprotocols.org/data-packages/}). Must include
 #' the \code{name}, \code{license}, and \code{version} fields.
 #' If \code{resources} is not specified then this will be automatically
-#' generated.\code{dpmr} uses \code{jsonlite} to convert the list into a
+#' generated. \code{dpmr} uses \code{jsonlite} to convert the list into a
 #' JSON file. See the \code{\link{toJSON}} documentation for details.
 #' If \code{meta = NULL} then a barebones \code{datapackage.json} file will be
 #' created.
@@ -102,8 +102,8 @@ datapackage_init <- function(df,
                     '  ', getwd(), '/', name, '/', 'datapackage.json\n\n',
                     '  For more information see: http://dataprotocols.org/data-packages/\n'))
         meta_template(df = df, name = name, data_paths = data_base_paths) %>%
-        toJSON(pretty = T) %>%
-        writeLines(con = paste0(name, '/datapackage.json'))
+            toJSON(pretty = T,auto_unbox=T) %>%  
+            writeLines(con = paste0(name, '/datapackage.json'))
     }
     else if (!is.null(meta)){
         if (class(meta) != 'list') stop('meta must be a list', call. = F)
@@ -112,13 +112,13 @@ datapackage_init <- function(df,
             message('Adding resources to metadata saved in datapackage.json.\n')
             list(meta, resources_create(data_paths = data_base_paths,
                                         df = df)) %>%
-                toJSON(pretty = T) %>%
+                toJSON(pretty = T,auto_unbox=T) %>%
                 writeLines(con = paste0(name, '/datapackage.json'))
         }
 
         else if (!is.null(meta$resources)){
             message('Meta data saved in: datapackage.json\n')
-            meta %>% toJSON(pretty = T) %>%
+            meta %>% toJSON(pretty = T,auto_unbox=T) %>%
             writeLines(con = paste0(name, '/datapackage.json'))
         }
     }
