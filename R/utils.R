@@ -13,20 +13,20 @@ meta_template <- function(df, name, data_paths){
     out <- list(name = name,
         title = '',
         description = '',
-        maintainer = '',
-        contributors = '',
-        version = 1,
+        maintainer = list(),
+        contributors = list(),
+        version = "1",
         last_updated = as.Date(Sys.time()),
         homepage = '',
-        keywords = '',
-        publisher = '',
+        keywords = list(),
+        publisher = list(),
         url = '',
         base = '',
         image = '',
         license = data.frame(type = 'PDDL-1.0',
                             url = 'http://opendatacommons.org/licenses/pddl/'),
         dataDependencies = '',
-        sources = '',
+        sources = list(),
         resources = resources_create(data_paths, df = df)
     )
     return(out)
@@ -58,8 +58,8 @@ schema_df <- function(df){
 #' @noRd
 
 resources_create <- function(data_paths, df){
-    resources_out <- list(resources = data.frame(path = data_paths),
-                            schema = schema_df(df))
+    resources_out <- list(list(path = data_paths,
+                          schema =list(fields=schema_df(df))))
     return(resources_out)
 }
 
