@@ -3,7 +3,7 @@
 Data Package Manager for R
 ====
 
-Version: 0.1.7 [![Build Status](https://travis-ci.org/christophergandrud/dpmr.svg?branch=master)](https://travis-ci.org/christophergandrud/dpmr)
+Version: 0.1.8 [![Build Status](https://travis-ci.org/christophergandrud/dpmr.svg?branch=master)](https://travis-ci.org/christophergandrud/dpmr)
 
 ## Description
 
