@@ -33,10 +33,10 @@
 #' Data <- data.frame(ID, A, B, C)
 #'
 #' # Initialise data package with barebones, automatically generated metadata
-#' datapackage_init(df = Data, package_name = 'My_Data_Package')
+#' datapackage_init(df = Data, package_name = 'my-data-package')
 #'
 #' # Initialise with user specified metadata
-#' meta_list <- list(name = 'My_Data_Package',
+#' meta_list <- list(name = 'my-data-package',
 #'                  title = 'A fake data package',
 #'                  last_updated = Sys.Date(),
 #'                  version = '0.1',
@@ -95,7 +95,7 @@ datapackage_init <- function(df,
     dir.create(paste0(name, '/scripts'))
 
     #----------------------- Create/validate datapackage.json ---------------- #
-    data_base_paths <- paste0('data/', name, '_data.csv')
+    data_base_paths <- paste0('data/', name, '-data.csv')
     if (is.null(meta)){ # Create bare
         message(paste0('Creating barebones metadata datapackage.json\n',
                     '- Please add additional information directly in:\n',
