@@ -56,6 +56,7 @@
 
 datapackage_init <- function(df,
                             package_name = NULL,
+                            output_dir = getwd(),
                             meta = NULL,
                             source_cleaner = NULL,
                             source_cleaner_rename = TRUE,
