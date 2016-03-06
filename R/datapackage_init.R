@@ -5,6 +5,8 @@
 #' data package.
 #' @param package_name character string name for the data package. Unnecessary
 #' if the \code{name} field is specified in \code{meta}.
+#' @param output_dir character string naming the output directory to save the
+#' data package into. By default the current working directory is used. 
 #' @param meta The list object with the data frame's meta data. The list
 #' item names must conform to the Open Knowledge Foundation's Data Package
 #' Protocol (see \url{http://dataprotocols.org/data-packages/}). Must include
@@ -66,6 +68,10 @@ datapackage_init <- function(df,
     if (missing(df)) stop('df must be specified.', call. = F)
     class(df) <- 'data.frame'
 
+    # Set working directory for datapackage
+    old_dir <- getwd()
+    setwd(output_dir)
+    
     if (!is.null(meta)){
         # Ensure that required fields are present in metadata list
         required_fields <- c('name', 'license.*', '.*version')
@@ -119,7 +125,7 @@ datapackage_init <- function(df,
 
         else if (!is.null(meta$resources)){
             message('Meta data saved in: datapackage.json\n')
-            meta %>% toJSON(pretty = T,auto_unbox=T) %>%
+            meta %>% toJSON(pretty = T, auto_unbox = T) %>%
             writeLines(con = paste0(name, '/datapackage.json'))
         }
     }
@@ -156,4 +162,6 @@ datapackage_init <- function(df,
     # Write the data file into data/ as a CSV
     message(paste('Saving data frame as:', data_base_paths))
     export(df, file = paste0(name, '/', data_base_paths), ...)
+    
+    setwd(old_dir)
 }

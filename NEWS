@@ -1,5 +1,10 @@
 # Changes to the package will be documented here
 
+## Version 0.1.9
+
+- `output_dir` argument for `datapackage_init` allows the user to specify the 
+directory to save the data package into. Thanks to @scls19fr for the suggestion.
+
 
 ## Version 0.1.8
 

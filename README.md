@@ -3,7 +3,10 @@
 Data Package Manager for R
 ====
 
-Version: 0.1.8 [![Build Status](https://travis-ci.org/christophergandrud/dpmr.svg?branch=master)](https://travis-ci.org/christophergandrud/dpmr)
+Version: 0.1.9 [![CRAN Version](http://www.r-pkg.org/badges/version/dpmr)](http://cran.r-project.org/package=dpmr)
+[![Build Status](https://travis-ci.org/christophergandrud/dpmr.svg?branch=master)](https://travis-ci.org/christophergandrud/dpmr)
+![CRAN Monthly Downloads](http://cranlogs.r-pkg.org/badges/last-month/dpmr)
+![CRAN Total Downloads](http://cranlogs.r-pkg.org/badges/grand-total/dpmr)
 
 ## Description
 
