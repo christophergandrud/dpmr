@@ -5,6 +5,8 @@
 - `output_dir` argument for `datapackage_init` allows the user to specify the 
 directory to save the data package into. Thanks to @scls19fr for the suggestion.
 
+- More intelligent handling of tbl_df class objects given to `df` in 
+`datapackage_init` and non-data.frame/non-tbl_df objects.
 
 ## Version 0.1.8
 
