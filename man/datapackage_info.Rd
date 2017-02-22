@@ -24,4 +24,3 @@ datapackage_info()
 }
 
 }
-

@@ -30,6 +30,7 @@
 #' @importFrom digest digest
 #' @importFrom jsonlite fromJSON
 #' @importFrom magrittr %>%
+#' @importFrom utils unzip
 #' @export
 
 datapackage_install <- function(path,

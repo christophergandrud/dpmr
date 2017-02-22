@@ -41,4 +41,3 @@ co2_data <- "https://github.com/datasets/co2-ppm/archive/master.zip" \%>\%
          datapackage_install()
 }
 }
-

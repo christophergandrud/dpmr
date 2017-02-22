@@ -18,4 +18,3 @@ convert into a data package.}
 Template for datapackage.json
 }
 \keyword{helpers}
-

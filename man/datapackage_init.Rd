@@ -69,4 +69,3 @@ meta_list <- list(name = 'my-data-package',
 }
 
 }
-
