@@ -106,6 +106,8 @@ datapackage_info()
 
 - [ ] Load data from a GitHub repo using GitHub usernames and repos.
 
+- [ ] Integrate [Octopub API](https://octopub.io/api#/datasets).
+
 ---
 
 Licensed under
