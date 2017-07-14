@@ -1,4 +1,4 @@
-[<img src="img/logo.png" align="right" height="80"/ alt="dmpr logo">](https://raw.githubusercontent.com/christophergandrud/dpmr/master/img/logo.png)
+[<img src="img/logo.png" align="right" height="80"/ alt="dmpr logo">](https://github.com/christophergandrud/dpmr/blob/master/img/logo.png?raw=true)
 
 Data Package Manager for R
 ====
